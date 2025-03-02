@@ -1,17 +1,57 @@
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-blue-100 min-h-screen">
+    // Main Content
+    <div className="flex-1 bg-[#d7e8f4]">
       <Navbar />
-      {/* Hero Section */}
-      <div className="relative w-full h-64 bg-cover bg-center text-white flex flex-col justify-center items-center"
-        style={{ backgroundImage: "url('/path-to-your-image.jpg')" }}>
-        <h1 className="text-4xl font-semibold italic">Thriftnity</h1>
-        <p className="text-center text-sm max-w-md">
-          thriftnity is a ajkbfyusebfyuwbguhrbgahd jhrsbfguerbvuera...
-        </p>
-        <button className="mt-4 bg-blue-500 px-4 py-2 rounded-md">About Us</button>
+      {/* Feature Grid */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="relative aspect-[16/9] md:aspect-[4/3]">
+            <Link href="/shop">
+              <Image
+                src="/home images/image 46.png"
+                alt="Shop our collection"
+                fill
+                className="object-cover rounded-lg"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg">
+                <h2 className="text-white text-xl font-bold">Shop</h2>
+              </div>
+            </Link>
+          </div>
+          <div className="grid gap-4">
+            <div className="relative aspect-[16/9]">
+              <Link href="/repair">
+                <Image
+                  src="/home images/image 46.png"
+                  alt="Repair your clothes"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg">
+                  <h2 className="text-white text-xl font-bold">Repair your clothes</h2>
+                </div>
+              </Link>
+            </div>
+            <div className="relative aspect-[16/9]">
+              <Link href="/trade">
+                <Image
+                  src="/home images/image 46.png"
+                  alt="Trade with others"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg">
+                  <h2 className="text-white text-xl font-bold">Trade with others</h2>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Categories Section */}
