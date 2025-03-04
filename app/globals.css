@@ -1,25 +1,238 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-primary: #1D9BF0;
-}
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Blues - More vibrant and cohesive */
+  --color-primary: #0066cc; /* Deeper royal blue as primary */
+  --color-primary-light: #3399ff; /* Brighter medium blue */
+  --color-primary-dark: #004d99; /* Darker navy blue */
+
+  /* Secondary Blues - Complementary blue palette */
+  --color-secondary: #1a4b8c; /* Deep navy blue */
+  --color-secondary-light: #2d6fc9; /* Medium-bright blue */
+  --color-secondary-dark: #0f3366; /* Very dark navy */
+
+  /* Accent Blues */
+  --color-accent: #e6f2ff; /* Very light blue for backgrounds */
+  --color-accent-hover: #cce4ff; /* Slightly darker light blue for hover states */
+
+  /* Background Colors - Cooler blue tint */
+  --background-start-rgb: 245, 250, 255; /* Slightly blue-tinted white */
+  --background-end-rgb: 235, 245, 255; /* Light blue-gray */
+  --foreground-rgb: 15, 40, 80; /* Dark blue for text */
+
+  /* Success, Warning, Error Colors - Adjusted to match blue theme */
+  --color-success: #0088a9; /* Teal-blue for success */
+  --color-warning: #f0a830; /* Amber for warnings */
+  --color-error: #d93654; /* Red with slight blue undertone */
+
+  /* Text Colors - Light Mode - Adjusted for blue theme */
+  --text-primary: #0a2647; /* Very dark blue for primary text */
+  --text-secondary: #1e4976; /* Dark blue for secondary text */
+  --text-muted: #4a6fa5; /* Medium blue for muted text */
+  --text-subtle: #7d9bc5; /* Light blue for subtle text */
+  --text-accent: #0066cc; /* Primary blue for accent text */
+  --text-on-primary: #ffffff; /* White text on primary blue */
+  --text-on-accent: #0a2647; /* Dark blue text on light blue backgrounds */
+  --text-link: #0066cc; /* Primary blue for links */
+  --text-link-hover: #004d99; /* Darker blue for link hover */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  /* Dark Mode Colors - Richer blues */
+  --background-start-rgb: 10, 25, 50; /* Very dark navy */
+  --background-end-rgb: 20, 35, 65; /* Dark navy blue */
+  --foreground-rgb: 230, 240, 255; /* Light blue-white */
+
+  /* Dark Mode Blues */
+  --color-primary: #3399ff; /* Brighter blue for dark mode */
+  --color-primary-light: #66b3ff; /* Very bright blue */
+  --color-primary-dark: #0077e6; /* Medium-dark blue */
+  --color-secondary: #1a4b8c; /* Deep navy blue */
+  --color-accent: #0a1930; /* Very dark navy for backgrounds */
+
+  /* Text Colors - Dark Mode - Enhanced for blue theme */
+  --text-primary: #e6f0ff; /* Light blue-white for primary text */
+  --text-secondary: #b3d1ff; /* Light blue for secondary text */
+  --text-muted: #7da6e8; /* Medium blue for muted text */
+  --text-subtle: #5580c0; /* Darker medium blue for subtle text */
+  --text-accent: #66b3ff; /* Bright blue for accent text */
+  --text-on-primary: #0a1930; /* Dark navy on bright blue */
+  --text-on-accent: #e6f0ff; /* Light blue-white on dark backgrounds */
+  --text-link: #3399ff; /* Bright blue for links */
+  --text-link-hover: #66b3ff; /* Brighter blue for link hover */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+}
+
+/* Text styling */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+p,
+span,
+div,
+label,
+input,
+textarea {
+  color: var(--text-secondary);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-subtle {
+  color: var(--text-subtle);
+}
+
+.text-accent {
+  color: var(--text-accent);
+}
+
+/* Link styles */
+a:not([class]) {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:not([class]):hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+}
+
+/* Text on colored backgrounds */
+.text-on-primary {
+  color: var(--text-on-primary);
+}
+
+.text-on-accent {
+  color: var(--text-on-accent);
+}
+
+/* Text emphasis variations */
+.text-bold {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+/* Custom scrollbar with enhanced blue theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-accent);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  border: 2px solid var(--color-accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+}
+
+/* Selection styles */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Button hover effects */
+.btn-primary {
+  background-color: var(--color-primary);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Card and container styles */
+.card {
+  background: white;
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 102, 204, 0.1);
+}
+
+.dark .card {
+  background: var(--color-accent);
+  border-color: var(--color-secondary);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -2px rgba(51, 153, 255, 0.15);
+}
+
+/* Blue gradient backgrounds */
+.bg-blue-gradient-light {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-light),
+    var(--color-primary)
+  );
+}
+
+.bg-blue-gradient-dark {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-dark)
+  );
+}
+
+/* Blue borders */
+.border-blue {
+  border-color: var(--color-primary);
+}
+
+.border-blue-light {
+  border-color: var(--color-primary-light);
+}
+
+/* Blue shadows */
+.shadow-blue {
+  box-shadow: 0 4px 14px -4px rgba(0, 102, 204, 0.3);
+}
+
+.dark .shadow-blue {
+  box-shadow: 0 4px 14px -4px rgba(51, 153, 255, 0.4);
 }
