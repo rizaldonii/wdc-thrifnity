@@ -4,6 +4,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-primary: #1D9BF0;
+  --color-background: #F9FAFB;
+  --color-title-color: #1F2937;
+  --color-body-color: #4B5563;
 }
 
 :root {
