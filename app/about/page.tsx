@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar"
 import {
     Check,
     Droplets,
@@ -9,7 +8,6 @@ import {
 export default function Thriftinity() {
     return (
         <div className="flex flex-col min-h-screen bg-background">
-            <Navbar />
             <main className="flex-1">
                 {/* Why We Exist Section */}
                 <section className="py-8 px-4 md:px-12 max-w-7xl mx-auto">

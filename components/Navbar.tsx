@@ -143,7 +143,7 @@ export default function Navbar() {
           >
             <div className="relative w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] md:w-[45px] md:h-[45px]">
               <Image
-                src=""
+                src="/LOGO.svg"
                 alt="Thriftnity"
                 fill
                 className="object-contain drop-shadow-md group-hover:drop-shadow-lg transition-all"
