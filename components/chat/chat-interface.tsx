@@ -1,23 +1,22 @@
-"use client";
+"use client"
 
 import type React from "react"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Send, ChevronLeft, MoreVertical, Search } from "lucide-react"
+import { Avatar } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { UserPlus, Flag } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { AnimatePresence, motion } from "framer-motion"
+import { ChevronLeft, Flag, Menu, MoreVertical, Search, Send, UserPlus } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 import ChatSidebar from "./chat-sidebar"
 import ProductCard from "./product-card"
-import { Avatar } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
 // Sample data for the chat
 const chatData = {
@@ -123,6 +122,32 @@ export default function ChatInterface() {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState(chatData.messages)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  // Check if we're on mobile and handle resize
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+
+      // Show sidebar automatically when switching to desktop
+      if (!mobile && !showSidebar) {
+        setShowSidebar(true)
+      }
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [showSidebar]) // Corrected dependency
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages]) //Corrected dependency
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault()
@@ -135,11 +160,16 @@ export default function ChatInterface() {
       }
       setMessages([...messages, newMessage])
       setMessage("")
+
+      // Scroll to bottom after sending message
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+      }, 100)
     }
   }
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row h-full bg-gray-50 relative">
       {/* Mobile header - only visible on small screens */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
         <h1 className="text-xl font-bold text-[#1D9BF0]">Thrifnity</h1>
@@ -156,7 +186,8 @@ export default function ChatInterface() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="w-full md:w-80 border-r border-gray-200 bg-white absolute md:relative z-10 h-[calc(100vh-60px)] md:h-screen"
+            className={`border-r border-gray-200 bg-white z-30 ${isMobile ? "fixed inset-0 w-full h-full top-[60px]" : "w-80 relative"
+              }`}
           >
             <ChatSidebar
               onSelectConversation={() => {
@@ -171,13 +202,21 @@ export default function ChatInterface() {
       </AnimatePresence>
 
       {/* Main chat area - responsive */}
-      <div className="flex-1 flex flex-col h-[calc(100vh-60px)] md:h-screen">
+      <div className="flex-1 flex flex-col h-full" ref={chatContainerRef}>
         {/* Chat header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-white">
           <div className="flex items-center space-x-3">
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setShowSidebar(!showSidebar)}>
-              <ChevronLeft />
-            </Button>
+            {isMobile ? (
+              <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setShowSidebar(!showSidebar)}>
+                <ChevronLeft />
+              </Button>
+            ) : (
+              !showSidebar && (
+                <Button variant="ghost" size="icon" onClick={() => setShowSidebar(true)}>
+                  <Menu className="h-5 w-5" />
+                </Button>
+              )
+            )}
             <Avatar className="h-10 w-10">
               <img src={chatData.contact.avatar || "/placeholder.svg"} alt={chatData.contact.name} />
             </Avatar>
@@ -190,29 +229,43 @@ export default function ChatInterface() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  className="flex items-center justify-center h-10 w-10 rounded-md hover:bg-gray-100 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center h-10 w-10 rounded-full hover:bg-gray-100 transition-colors duration-200"
                 >
-                  <MoreVertical className="h-5 w-5" />
+                  <MoreVertical className="h-5 w-5 text-gray-600" />
                 </motion.button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 z-50" sideOffset={5}>
-                <DropdownMenuItem className="cursor-pointer flex items-center py-2 hover:bg-gray-100">
-                  <UserPlus className="h-4 w-4 mr-2 text-[#1D9BF0]" />
-                  <span>Follow +</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer flex items-center py-2 text-red-500 hover:bg-red-50">
-                  <Flag className="h-4 w-4 mr-2" />
-                  <span>Report User</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
+              <AnimatePresence>
+                <DropdownMenuContent className="w-56 z-50" sideOffset={5} asChild>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <DropdownMenuItem className="cursor-pointer flex items-center gap-2 py-2 px-3 hover:bg-blue-50 transition-colors duration-200">
+                      <motion.div whileHover={{ scale: 0.9 }} whileTap={{ scale: 0.9 }}>
+                        <UserPlus className="h-4 w-4 text-[#1D9BF0]" />
+                      </motion.div>
+                      <span>Follow +</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer flex items-center gap-2 py-2 px-3 text-red-500 hover:bg-red-50 transition-colors duration-200">
+                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                        <Flag className="h-4 w-4" />
+                      </motion.div>
+                      <span>Report User</span>
+                    </DropdownMenuItem>
+                  </motion.div>
+                </DropdownMenuContent>
+              </AnimatePresence>
             </DropdownMenu>
           </div>
         </div>
 
         {/* Chat messages */}
-        <div className="flex-1 overflow-y-auto p-2 sm:p-4 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-2 sm:p-4 bg-gray-50 pb-24 md:pb-4">
           <div className="space-y-4">
             {messages.map((msg) => (
               <motion.div
@@ -233,17 +286,15 @@ export default function ChatInterface() {
 
                   {msg.text && (
                     <div
-                      className={`rounded-2xl p-2 sm:p-3 ${
-                        msg.senderId === chatData.user.id
+                      className={`rounded-2xl p-2 sm:p-3 ${msg.senderId === chatData.user.id
                           ? "bg-[#1D9BF0] text-white"
                           : "bg-white border border-gray-200"
-                      }`}
+                        }`}
                     >
                       <p className="text-sm sm:text-base">{msg.text}</p>
                       <p
-                        className={`text-xs mt-1 text-right ${
-                          msg.senderId === chatData.user.id ? "text-blue-100" : "text-gray-500"
-                        }`}
+                        className={`text-xs mt-1 text-right ${msg.senderId === chatData.user.id ? "text-blue-100" : "text-gray-500"
+                          }`}
                       >
                         {msg.time}
                       </p>
@@ -254,9 +305,8 @@ export default function ChatInterface() {
                     <div className="mt-2">
                       <ProductCard product={msg.product} />
                       <p
-                        className={`text-xs mt-1 ${
-                          msg.senderId === chatData.user.id ? "text-right text-gray-500" : "text-gray-500"
-                        }`}
+                        className={`text-xs mt-1 ${msg.senderId === chatData.user.id ? "text-right text-gray-500" : "text-gray-500"
+                          }`}
                       >
                         {msg.time}
                       </p>
@@ -265,11 +315,12 @@ export default function ChatInterface() {
                 </div>
               </motion.div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
         </div>
 
-        {/* Chat input */}
-        <div className="p-2 sm:p-4 border-t border-gray-200 bg-white">
+        {/* Chat input - fixed at bottom on mobile */}
+        <div className="p-2 sm:p-4 border-t border-gray-200 bg-white md:relative fixed bottom-0 left-0 right-0 z-40">
           <form onSubmit={handleSendMessage} className="flex space-x-2">
             <Input
               value={message}
@@ -286,3 +337,4 @@ export default function ChatInterface() {
     </div>
   )
 }
+

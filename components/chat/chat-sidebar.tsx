@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Search, Plus } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Avatar } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { motion } from "framer-motion"
+import { Plus, Search } from "lucide-react"
+import { useState } from "react"
 
 interface ChatSidebarProps {
   onSelectConversation?: () => void
@@ -119,9 +119,8 @@ export default function ChatSidebar({ onSelectConversation }: ChatSidebarProps) 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleConversationClick(conv.id)}
-                className={`flex items-center p-2 rounded-lg cursor-pointer ${
-                  activeConversation === conv.id ? "bg-blue-50" : "hover:bg-gray-100"
-                }`}
+                className={`flex items-center p-2 rounded-lg cursor-pointer ${activeConversation === conv.id ? "bg-blue-50" : "hover:bg-gray-100"
+                  }`}
               >
                 <div className="relative">
                   <Avatar className="h-10 w-10 sm:h-12 sm:w-12">

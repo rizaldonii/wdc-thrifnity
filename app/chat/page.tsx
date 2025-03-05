@@ -1,10 +1,10 @@
-import ChatInterface from "@/components/chat/chat-interface"
+import ChatContainer from "@/components/chat/chat-container"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-50">
-      <ChatInterface />
-    </main>
+    <div className="w-full -mt-4 mb-8">
+      <ChatContainer />
+    </div>
   )
 }
 
