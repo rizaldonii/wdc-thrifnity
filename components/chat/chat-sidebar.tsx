@@ -78,7 +78,7 @@ export default function ChatSidebar({ onSelectConversation }: ChatSidebarProps) 
   return (
     <div className="flex flex-col h-full">
       <div className="p-4 border-b border-gray-200 hidden md:block">
-        <h1 className="text-xl font-bold text-[#1D9BF0] mb-4">Thrifnity</h1>
+        <h1 className="text-xl font-bold text-[#1D9BF0] mb-4">Chat</h1>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input

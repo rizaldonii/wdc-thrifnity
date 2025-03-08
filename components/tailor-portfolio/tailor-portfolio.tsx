@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { ChevronRight, MapPin, MessageSquare, Star, X } from "lucide-react"
 import Image from "next/image"
-import { Star, MapPin, ChevronRight, X, MessageSquare, Upload, ImagePlus } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react"
 
 const tailors = [
   {
@@ -39,6 +39,18 @@ const tailors = [
         image: "/placeholder.svg?height=400&width=600",
         title: "Shirt Collar Repair",
         description: "Fixed frayed collar on business shirt",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Sweater Hole Repair",
+        description: "Mended multiple holes in wool sweater",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Pants Hemming",
+        description: "Shortened pants to perfect length",
       },
     ],
     testimonials: [
@@ -96,6 +108,24 @@ const tailors = [
         title: "Suit Jacket Restoration",
         description: "Restored a damaged vintage wool suit jacket",
       },
+      {
+        id: 4,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Vintage Coat Button Replacement",
+        description: "Found and replaced period-appropriate buttons",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Antique Quilt Repair",
+        description: "Restored family heirloom quilt with matching fabric",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Vintage Handbag Restoration",
+        description: "Repaired and cleaned 1960s leather handbag",
+      },
     ],
     testimonials: [
       {
@@ -149,6 +179,24 @@ const tailors = [
         image: "/placeholder.svg?height=400&width=600",
         title: "Embellished Repair",
         description: "Added beadwork to cover damaged fabric on evening gown",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Custom Monogram",
+        description: "Added personalized monogram to cover stained area",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Decorative Denim Repair",
+        description: "Transformed torn jeans with Japanese sashiko stitching",
+      },
+      {
+        id: 7,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Embroidered Collar",
+        description: "Added embroidery to refresh worn shirt collar",
       },
     ],
     testimonials: [
@@ -206,6 +254,24 @@ const tailors = [
         title: "Leather Bag Restoration",
         description: "Restored vintage leather bag with new stitching",
       },
+      {
+        id: 4,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Motorcycle Jacket Repair",
+        description: "Fixed crash damage on leather motorcycle jacket",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Leather Seat Repair",
+        description: "Repaired torn leather on vintage chair",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Denim Jacket Restoration",
+        description: "Replaced worn collar and cuffs on denim jacket",
+      },
     ],
     testimonials: [
       {
@@ -253,6 +319,30 @@ const tailors = [
         image: "/placeholder.svg?height=400&width=600",
         title: "Ikat Fabric Mending",
         description: "Restored color and repaired tears in ikat textile",
+      },
+      {
+        id: 4,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Batik Shirt Repair",
+        description: "Mended torn seam in hand-painted batik shirt",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Traditional Kebaya Restoration",
+        description: "Repaired and restored vintage kebaya with original techniques",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Wayang Fabric Art Repair",
+        description: "Restored decorative wayang fabric wall hanging",
+      },
+      {
+        id: 7,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Batik Table Runner Repair",
+        description: "Fixed frayed edges and tears in antique table runner",
       },
     ],
     testimonials: [
@@ -308,6 +398,18 @@ const tailors = [
         title: "Veil Restoration",
         description: "Repaired delicate wedding veil with invisible mending",
       },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Beadwork Repair",
+        description: "Restored intricate beading on formal gown",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Suit Alteration",
+        description: "Resized vintage suit for modern fit",
+      },
     ],
     testimonials: [
       {
@@ -333,6 +435,219 @@ const tailors = [
         comment:
           "Hendra repaired my mother's 30-year-old wedding dress that I wanted to wear for my own wedding. His attention to detail is amazing. The dress looks brand new!",
         date: "2 months ago",
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: "Putri Anggraini",
+    location: "Bali",
+    rating: 4.8,
+    reviews: 105,
+    specialty: "Resort Wear & Swimwear Repair",
+    description:
+      "Specializing in repairing resort wear, swimwear, and lightweight summer clothing. I can fix tears, replace elastic, and restore damaged beachwear to like-new condition.",
+    portfolio: [
+      {
+        id: 1,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Swimsuit Elastic Replacement",
+        description: "Replaced worn elastic in designer swimsuit",
+      },
+      {
+        id: 2,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Beach Cover-up Repair",
+        description: "Fixed torn lace on beach cover-up",
+      },
+      {
+        id: 3,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Resort Dress Alteration",
+        description: "Resized and repaired vacation dress",
+      },
+      {
+        id: 4,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Swimwear Strap Repair",
+        description: "Replaced broken straps on bikini top",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Linen Shirt Repair",
+        description: "Fixed torn seam and replaced buttons on linen shirt",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Sarong Restoration",
+        description: "Repaired frayed edges on hand-painted sarong",
+      },
+    ],
+    testimonials: [
+      {
+        id: 1,
+        name: "Diana Putri",
+        rating: 5,
+        comment:
+          "Putri saved my favorite swimsuit! The elastic was completely worn out, and she replaced it perfectly. Fits like new again!",
+        date: "2 weeks ago",
+      },
+      {
+        id: 2,
+        name: "James Wilson",
+        rating: 5,
+        comment:
+          "I ripped my favorite linen shirt while on vacation in Bali. Putri fixed it so well you can't even tell it was damaged. Quick service too!",
+        date: "1 month ago",
+      },
+      {
+        id: 3,
+        name: "Sarah Johnson",
+        rating: 4,
+        comment: "Great work on my beach cover-up. The lace repair is beautiful and the price was reasonable.",
+        date: "6 weeks ago",
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "Rudi Hartono",
+    location: "Makassar",
+    rating: 4.5,
+    reviews: 67,
+    specialty: "Uniform & Workwear Repair",
+    description:
+      "I specialize in repairing and altering uniforms and workwear. From fixing tears and replacing zippers to adding reinforcement for heavy-duty use, I ensure your work clothes last longer.",
+    portfolio: [
+      {
+        id: 1,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Chef Jacket Repair",
+        description: "Reinforced seams and replaced buttons on chef uniform",
+      },
+      {
+        id: 2,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Work Pants Reinforcement",
+        description: "Added knee reinforcement to prevent future tears",
+      },
+      {
+        id: 3,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Security Uniform Alteration",
+        description: "Resized and repaired security guard uniform",
+      },
+      {
+        id: 4,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Nurse Uniform Repair",
+        description: "Fixed torn pocket and replaced zipper on scrubs",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Mechanic Coverall Repair",
+        description: "Patched and reinforced mechanic's coveralls",
+      },
+    ],
+    testimonials: [
+      {
+        id: 1,
+        name: "Anton Wijaya",
+        rating: 5,
+        comment:
+          "Rudi repaired my chef jackets and added reinforcement to prevent future tears. His work is excellent and has saved me money on replacements.",
+        date: "3 weeks ago",
+      },
+      {
+        id: 2,
+        name: "Nina Hartati",
+        rating: 4,
+        comment:
+          "Good work on my nurse uniforms. The repairs are holding up well after multiple washes. Reasonable prices too.",
+        date: "1 month ago",
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: "Maya Kusuma",
+    location: "Palembang",
+    rating: 4.9,
+    reviews: 94,
+    specialty: "Children's Clothing Repair",
+    description:
+      "Specializing in repairing children's clothing with a focus on durability and comfort. I can fix tears, replace zippers, and add reinforcement to make kids' clothes last longer.",
+    portfolio: [
+      {
+        id: 1,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "School Uniform Repair",
+        description: "Fixed torn pocket and reinforced knees on school pants",
+      },
+      {
+        id: 2,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Children's Jacket Zipper",
+        description: "Replaced broken zipper on child's winter jacket",
+      },
+      {
+        id: 3,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Growth Extension",
+        description: "Added fabric to extend life of growing child's pants",
+      },
+      {
+        id: 4,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Costume Repair",
+        description: "Fixed torn seams on child's dance costume",
+      },
+      {
+        id: 5,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Reinforced Knees",
+        description: "Added decorative patches to reinforce pants knees",
+      },
+      {
+        id: 6,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Sports Uniform Repair",
+        description: "Fixed torn soccer uniform with reinforced stitching",
+      },
+      {
+        id: 7,
+        image: "/placeholder.svg?height=400&width=600",
+        title: "Backpack Repair",
+        description: "Reinforced straps and fixed tear in school backpack",
+      },
+    ],
+    testimonials: [
+      {
+        id: 1,
+        name: "Ratna Sari",
+        rating: 5,
+        comment:
+          "Maya is amazing! She's fixed countless items of my kids' clothing and they always come back stronger than before. Her reinforced knees on pants have saved us so much money.",
+        date: "2 weeks ago",
+      },
+      {
+        id: 2,
+        name: "Budi Prakoso",
+        rating: 5,
+        comment:
+          "My son's school uniforms were constantly getting torn. Maya not only repaired them but added reinforcement that has prevented new tears. Highly recommended!",
+        date: "1 month ago",
+      },
+      {
+        id: 3,
+        name: "Lina Wati",
+        rating: 5,
+        comment:
+          "Maya fixed my daughter's favorite dress that had a huge tear. She did such a beautiful job that my daughter didn't even notice it had been repaired!",
+        date: "6 weeks ago",
       },
     ],
   },
@@ -464,7 +779,7 @@ export function TailorPortfolio() {
                   <h4 className="text-lg font-medium mb-2">About</h4>
                   <p className="text-gray-600">{selectedTailor.description}</p>
                   <button
-                    onClick={() => (window.location.href = `/chat/${selectedTailor.id}`)}
+                    onClick={() => (window.location.href = `/chat/`)}
                     className="mt-4 py-2 px-4 bg-[#1D9BF0] text-white rounded-md hover:bg-[#0c85d0] transition-colors flex items-center justify-center"
                   >
                     <MessageSquare className="h-4 w-4 mr-2" />
@@ -501,40 +816,6 @@ export function TailorPortfolio() {
                   </div>
                 </div>
 
-                <div className="mb-6">
-                  <h4 className="text-lg font-medium mb-3">Add to Portfolio</h4>
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Photo Title</label>
-                      <input
-                        type="text"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1D9BF0] focus:border-transparent"
-                        placeholder="Enter a title for your photo"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                      <textarea
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1D9BF0] focus:border-transparent"
-                        rows={2}
-                        placeholder="Describe the repair work"
-                      ></textarea>
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Upload Photo</label>
-                      <div className="border-2 border-dashed border-gray-300 rounded-md p-6 text-center hover:border-[#1D9BF0] transition-colors cursor-pointer">
-                        <ImagePlus className="mx-auto h-12 w-12 text-gray-400" />
-                        <p className="mt-1 text-sm text-gray-500">Click to upload or drag and drop</p>
-                        <p className="mt-1 text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
-                      </div>
-                    </div>
-                    <button className="w-full py-2 px-4 bg-[#1D9BF0] text-white rounded-md hover:bg-[#0c85d0] transition-colors flex items-center justify-center">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Add to Portfolio
-                    </button>
-                  </div>
-                </div>
-
                 <div>
                   <h4 className="text-lg font-medium mb-3">Customer Testimonials</h4>
                   <div className="space-y-4">
@@ -552,9 +833,8 @@ export function TailorPortfolio() {
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
-                                className={`h-4 w-4 ${
-                                  i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                                }`}
+                                className={`h-4 w-4 ${i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                                  }`}
                               />
                             ))}
                           </div>

@@ -172,7 +172,7 @@ export default function ChatInterface() {
     <div className="flex flex-col md:flex-row h-full bg-gray-50 relative">
       {/* Mobile header - only visible on small screens */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
-        <h1 className="text-xl font-bold text-[#1D9BF0]">Thrifnity</h1>
+        <h1 className="text-xl font-bold text-[#1D9BF0]">Chat</h1>
         <Button variant="ghost" size="icon" onClick={() => setShowSidebar(!showSidebar)}>
           {showSidebar ? <ChevronLeft /> : <Search />}
         </Button>
@@ -265,7 +265,7 @@ export default function ChatInterface() {
         </div>
 
         {/* Chat messages */}
-        <div className="flex-1 overflow-y-auto p-2 sm:p-4 bg-gray-50 pb-24 md:pb-4">
+        <div className="flex-1 overflow-y-auto p-2 sm:p-4 bg-gray-50 pb-16 md:pb-4">
           <div className="space-y-4">
             {messages.map((msg) => (
               <motion.div
@@ -287,8 +287,8 @@ export default function ChatInterface() {
                   {msg.text && (
                     <div
                       className={`rounded-2xl p-2 sm:p-3 ${msg.senderId === chatData.user.id
-                          ? "bg-[#1D9BF0] text-white"
-                          : "bg-white border border-gray-200"
+                        ? "bg-[#1D9BF0] text-white"
+                        : "bg-white border border-gray-200"
                         }`}
                     >
                       <p className="text-sm sm:text-base">{msg.text}</p>
@@ -320,7 +320,10 @@ export default function ChatInterface() {
         </div>
 
         {/* Chat input - fixed at bottom on mobile */}
-        <div className="p-2 sm:p-4 border-t border-gray-200 bg-white md:relative fixed bottom-0 left-0 right-0 z-40">
+        <div
+          className={`p-2 sm:p-4 border-t border-gray-200 bg-white sticky bottom-0 left-0 right-0 z-40 ${isMobile && showSidebar ? 'hidden' : 'block'
+            }`}
+        >
           <form onSubmit={handleSendMessage} className="flex space-x-2">
             <Input
               value={message}
