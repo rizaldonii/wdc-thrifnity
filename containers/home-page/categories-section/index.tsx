@@ -1,48 +1,48 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { categories } from "@/data/categories"
+import type { MainCategory } from "@/types/category"
+import { AnimatePresence, motion } from "framer-motion"
 import {
+  Briefcase,
+  Check,
   ChevronRight,
   Filter,
   LayoutGrid,
   List,
-  Search,
-  ShoppingBag,
-  Shirt,
   PenIcon,
-  SaladIcon,
   PocketIcon,
-  X,
-  SlidersHorizontal,
-  Check,
-  Sparkles,
-  Briefcase,
+  SaladIcon,
+  Search,
+  Shirt,
+  ShoppingBag,
   ShoppingCart,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { categories } from "@/data/categories";
-import { MainCategory } from "@/types/category";
+  SlidersHorizontal,
+  Sparkles,
+  X,
+} from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
 
 interface CategoryItemProps {
-  id: string;
-  name: MainCategory;
-  slug: string;
-  description?: string;
-  subcategoryCount: number;
-  imageUrl?: string;
+  id: string
+  name: MainCategory
+  slug: string
+  description?: string
+  subcategoryCount: number
+  imageUrl?: string
 }
 
 export default function Category() {
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState<"name" | "items">("name");
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [sortOrder, setSortOrder] = useState<"name" | "items">("name")
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   // Transform categories data to include subcategory count and image URL
   const categoryItems: CategoryItemProps[] = categories.map((category) => ({
@@ -52,45 +52,42 @@ export default function Category() {
     description: category.description,
     subcategoryCount: category.subcategories.length,
     imageUrl: `/placeholder.svg?height=400&width=320&text=${category.name}`,
-  }));
+  }))
 
   // Filter categories based on search query
   const filteredCategories = categoryItems
     .filter(
       (category) =>
         category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (category.description &&
-          category.description
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase()))
+        (category.description && category.description.toLowerCase().includes(searchQuery.toLowerCase())),
     )
     .sort((a, b) => {
       if (sortOrder === "name") {
-        return a.name.localeCompare(b.name);
+        return a.name.localeCompare(b.name)
       } else {
-        return b.subcategoryCount - a.subcategoryCount;
+        return b.subcategoryCount - a.subcategoryCount
       }
-    });
+    })
 
   // Get icon component based on category name
   const getCategoryIcon = (name: MainCategory) => {
     switch (name.toLowerCase()) {
       case "tops":
-        return <Shirt className="w-6 h-6" />;
+        return <Shirt className="w-6 h-6" />
       case "bottoms":
-        return <PenIcon className="w-6 h-6" />;
+        return <PenIcon className="w-6 h-6" />
       case "dresses":
-        return <SaladIcon className="w-6 h-6" />;
+        return <SaladIcon className="w-6 h-6" />
       case "outerwear":
-        return <PocketIcon className="w-6 h-6" />;
+        return <PocketIcon className="w-6 h-6" />
       case "accessories":
-        return <Briefcase className="w-6 h-6" />;
+        return <Briefcase className="w-6 h-6" />
       case "shoes":
-        return <ShoppingCart className="w-6 h-6" />;
+        return <ShoppingCart className="w-6 h-6" />
       default:
-        return <ShoppingBag className="w-6 h-6" />;
+        return <ShoppingBag className="w-6 h-6" />
     }
-  };
+  }
 
   // Animation variants
   const containerVariants = {
@@ -101,7 +98,7 @@ export default function Category() {
         staggerChildren: 0.1,
       },
     },
-  };
+  }
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -114,7 +111,7 @@ export default function Category() {
         damping: 12,
       },
     },
-  };
+  }
 
   const filterVariants = {
     hidden: { opacity: 0, height: 0 },
@@ -125,10 +122,19 @@ export default function Category() {
         duration: 0.3,
       },
     },
-  };
+  }
 
   return (
-    <section className="py-16 relative">
+    <section className="py-16 relative categories-section">
+      {/* Add a style tag at the top of the component to force white text only in grid view */}
+      <style jsx global>{`
+        /* Only apply white text to grid view cards */
+        .categories-section .grid-view .category-card h3,
+        .categories-section .grid-view .category-card .badge-text,
+        .categories-section .grid-view .category-card .subcategory-count {
+          color: white !important;
+        }
+      `}</style>
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -147,15 +153,8 @@ export default function Category() {
 
       {/* Header Content */}
       <div className="relative text-center space-y-8 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative inline-block"
-        >
-          <Badge
-            variant="outline"
-            className="bg-primary/10 text-primary border-primary/20"
-          >
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="relative inline-block">
+          <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
             <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2 animate-pulse" />
             <span className="tracking-wider">CLOTHING CATEGORIES</span>
             <Sparkles className="w-4 h-4 ml-2" />
@@ -179,8 +178,7 @@ export default function Category() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed"
         >
-          Discover our thoughtfully curated collection of sustainable fashion
-          pieces,
+          Discover our thoughtfully curated collection of sustainable fashion pieces,
           <br className="hidden md:block" />
           where style meets consciousness in perfect harmony
         </motion.p>
@@ -276,9 +274,7 @@ export default function Category() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <h4 className="text-sm font-medium text-foreground">
-                    Sort by
-                  </h4>
+                  <h4 className="text-sm font-medium text-foreground">Sort by</h4>
                   <div className="flex mt-2 space-x-2">
                     <Button
                       variant={sortOrder === "name" ? "default" : "outline"}
@@ -303,8 +299,7 @@ export default function Category() {
 
                 <div className="self-end">
                   <p className="text-sm text-muted-foreground">
-                    Showing {filteredCategories.length} of{" "}
-                    {categoryItems.length} categories
+                    Showing {filteredCategories.length} of {categoryItems.length} categories
                   </p>
                 </div>
               </div>
@@ -319,18 +314,15 @@ export default function Category() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 grid-view"
         >
           {filteredCategories.map((category) => (
             <motion.div key={category.id} variants={itemVariants}>
               <Link href={`/category/${category.slug}`} className="group block">
-                <Card className="overflow-hidden border-0 shadow-md bg-card transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                <Card className="overflow-hidden border-0 shadow-md bg-card transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px] category-card">
                   <div className="aspect-[4/5] relative">
                     <Image
-                      src={
-                        category.imageUrl ||
-                        "/placeholder.svg?height=400&width=320"
-                      }
+                      src={category.imageUrl || "/placeholder.svg?height=400&width=320"}
                       alt={category.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -338,27 +330,27 @@ export default function Category() {
                       quality={90}
                     />
 
-                    {/* Overlay */}
+                    {/* Update the overlay class */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-70 group-hover:opacity-75 transition-opacity" />
 
                     {/* Category Icon Badge */}
                     <div className="absolute top-4 right-4 p-2.5 rounded-full shadow-lg transform -rotate-12 group-hover:rotate-0 transition-all duration-300 group-hover:scale-110 bg-background/90">
-                      <span className="text-primary">
-                        {getCategoryIcon(category.name)}
-                      </span>
+                      <span className="text-primary">{getCategoryIcon(category.name)}</span>
                     </div>
 
                     <div className="absolute inset-0 flex flex-col justify-end p-6">
                       <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-500">
-                        <h3 className="text-xl font-bold text-white mb-1 group-hover:translate-x-1 transition-transform">
+                        <h3
+                          className="text-xl font-bold mb-1 group-hover:translate-x-1 transition-transform"
+                          style={{ color: "white" }}
+                        >
                           {category.name}
                         </h3>
                         <div className="flex items-center justify-between mt-2">
-                          <Badge
-                            variant="outline"
-                            className="bg-background/20 text-white border-transparent"
-                          >
-                            {category.subcategoryCount} subcategories
+                          {/* Update the badge to include the subcategory-count class */}
+                          <Badge variant="outline" className="bg-background/20 border-transparent">
+                            <span className="text-white">{category.subcategoryCount}</span>
+                            <span className="text-[#7d9bc5]">&nbsp;subcategories</span>
                           </Badge>
                           <span className="p-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300 shadow-lg bg-primary text-primary-foreground">
                             <ChevronRight className="w-4 h-4" />
@@ -376,23 +368,16 @@ export default function Category() {
 
       {/* Category List View */}
       {viewMode === "list" && (
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-5"
-        >
+        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-5">
           {filteredCategories.map((category) => (
             <motion.div key={category.id} variants={itemVariants}>
               <Link href={`/category/${category.slug}`} className="group">
-                <Card className="overflow-hidden border shadow-sm hover:shadow-md transition-all duration-300">
+                {/* Update the list view card to use the custom classes */}
+                <Card className="overflow-hidden border shadow-sm hover:shadow-md transition-all duration-300 category-card">
                   <div className="flex flex-col sm:flex-row items-center">
                     <div className="relative w-full sm:w-56 h-52 sm:h-40">
                       <Image
-                        src={
-                          category.imageUrl ||
-                          "/placeholder.svg?height=160&width=224"
-                        }
+                        src={category.imageUrl || "/placeholder.svg?height=160&width=224" || "/placeholder.svg"}
                         alt={category.name}
                         fill
                         sizes="(max-width: 640px) 100vw, 224px"
@@ -411,13 +396,8 @@ export default function Category() {
                     <CardContent className="flex-1 p-6 sm:p-5 flex flex-col justify-between relative">
                       <div className="relative">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-xl font-bold text-foreground">
-                            {category.name}
-                          </h3>
-                          <Badge
-                            variant="outline"
-                            className="bg-primary/10 text-primary border-primary/20"
-                          >
+                          <h3 className="text-xl font-bold text-foreground">{category.name}</h3>
+                          <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
                             {category.subcategoryCount} subcategories
                           </Badge>
                         </div>
@@ -428,9 +408,7 @@ export default function Category() {
                       </div>
 
                       <div className="mt-4 flex justify-between items-center">
-                        <span className="text-xs text-muted-foreground">
-                          New arrivals weekly
-                        </span>
+                        <span className="text-xs text-muted-foreground">New arrivals weekly</span>
                         <span className="inline-flex items-center font-medium text-primary">
                           Explore collection
                           <ChevronRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
@@ -455,12 +433,10 @@ export default function Category() {
           <div className="inline-flex justify-center items-center w-20 h-20 rounded-full mb-6 bg-accent">
             <Filter className="w-10 h-10 text-muted-foreground" />
           </div>
-          <h3 className="text-xl font-semibold text-foreground">
-            No categories found
-          </h3>
+          <h3 className="text-xl font-semibold text-foreground">No categories found</h3>
           <p className="mt-3 max-w-md mx-auto text-muted-foreground">
-            We couldn't find any categories matching your search. Try adjusting
-            your search terms or browse all categories.
+            We couldn't find any categories matching your search. Try adjusting your search terms or browse all
+            categories.
           </p>
           <Button onClick={() => setSearchQuery("")} className="mt-6">
             Clear search
@@ -468,5 +444,6 @@ export default function Category() {
         </motion.div>
       )}
     </section>
-  );
+  )
 }
+
