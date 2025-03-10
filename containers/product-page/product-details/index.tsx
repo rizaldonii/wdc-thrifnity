@@ -46,7 +46,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Product, ProductColor } from "@/types/product";
+import { Product, ProductColor } from "@/types/product";
 import { formatCurrency } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -460,28 +460,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           </div>
 
-          {/* Shipping & Returns */}
-          <div className="bg-muted/30 rounded-lg p-4 mb-8">
-            <div className="flex items-start gap-3 mb-3">
-              <Truck className="h-5 w-5 text-muted-foreground mt-0.5" />
-              <div>
-                <h3 className="font-medium">Free Shipping</h3>
-                <p className="text-sm text-muted-foreground">
-                  Free standard shipping on orders over $100
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <RefreshCw className="h-5 w-5 text-muted-foreground mt-0.5" />
-              <div>
-                <h3 className="font-medium">Easy Returns</h3>
-                <p className="text-sm text-muted-foreground">
-                  30-day return policy
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* Seller Info */}
           <div className="border rounded-lg p-4 mb-8">
             <div className="flex items-center gap-3 mb-3">
@@ -700,10 +678,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                     <div>{product.gender}</div>
                     <div className="text-muted-foreground">Condition</div>
                     <div>{product.condition}</div>
-                    <div className="text-muted-foreground">Category</div>
-                    <div>
-                      {product.category.main} / {product.category.sub}
-                    </div>
                   </div>
                 </div>
                 <div>
