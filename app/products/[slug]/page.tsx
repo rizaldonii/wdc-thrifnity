@@ -13,6 +13,7 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const product = products.find((p) => p.slug === params.slug);
+  console.log(product);
 
   if (!product) {
     return {
