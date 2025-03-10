@@ -44,6 +44,8 @@ export interface BusinessHours {
 }
 
 export interface Tailor {
+  yearsOfExperience: any;
+  distance: any;
   phone: string;
   email: string;
   website: string;
@@ -56,6 +58,7 @@ export interface Tailor {
   specialty: string[];
   experience: number;
   location: {
+    country: string;
     address: string;
     city: string;
     province: string;

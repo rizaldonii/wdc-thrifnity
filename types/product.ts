@@ -82,8 +82,8 @@ export interface ProductImage {
   id: string;
   url: string;
   alt: string;
-  isPrimary: boolean;
-  views: "front" | "back" | "side" | "detail";
+  isPrimary?: boolean;
+  views?: "front" | "back" | "side" | "detail";
 }
 
 export interface ProductColor {

@@ -17,6 +17,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 15,
     location: {
+      country: "Indonesia",
       address: "Jl. Kemang Raya No. 123",
       city: "Jakarta Selatan",
       province: "DKI Jakarta",
@@ -127,6 +128,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t2",
@@ -144,6 +147,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 20,
     location: {
+      country: "Indonesia",
       address: "Jl. Malioboro No. 45",
       city: "Yogyakarta",
       province: "DI Yogyakarta",
@@ -221,6 +225,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t3",
@@ -233,6 +239,7 @@ export const tailors: Tailor[] = [
     specialty: ["Luxury Suits", "Formal Wear", "Corporate Attire", "Tuxedos"],
     experience: 12,
     location: {
+      country: "Indonesia",
       address: "Jl. MH Thamrin No. 88",
       city: "Jakarta Pusat",
       province: "DKI Jakarta",
@@ -318,6 +325,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t4",
@@ -335,6 +344,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 5,
     location: {
+      country: "Indonesia",
       address: "Jl. Senopati No. 45",
       city: "Jakarta Selatan",
       province: "DKI Jakarta",
@@ -412,6 +422,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t5",
@@ -424,6 +436,7 @@ export const tailors: Tailor[] = [
     specialty: ["Kebaya", "Traditional Fusion", "Embroidery", "Wedding Attire"],
     experience: 25,
     location: {
+      country: "Indonesia",
       address: "Jl. Kembang Jepun No. 72",
       city: "Surabaya",
       province: "Jawa Timur",
@@ -501,6 +514,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t6",
@@ -517,6 +532,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 8,
     location: {
+      country: "Indonesia",
       address: "Jl. Asia Afrika No. 123",
       city: "Bandung",
       province: "Jawa Barat",
@@ -594,6 +610,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t7",
@@ -611,6 +629,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 6,
     location: {
+      country: "Indonesia",
       address: "Jl. Ubud Raya No. 88",
       city: "Denpasar",
       province: "Bali",
@@ -688,6 +707,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t8",
@@ -705,6 +726,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 10,
     location: {
+      country: "Indonesia",
       address: "Jl. Tebet Raya No. 56",
       city: "Jakarta Selatan",
       province: "DKI Jakarta",
@@ -782,6 +804,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t9",
@@ -799,6 +823,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 15,
     location: {
+      country: "Indonesia",
       address: "Jl. Gajah Mada No. 189",
       city: "Semarang",
       province: "Jawa Tengah",
@@ -876,6 +901,8 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
   {
     id: "t10",
@@ -893,6 +920,7 @@ export const tailors: Tailor[] = [
     ],
     experience: 18,
     location: {
+      country: "Indonesia",
       address: "Jl. Braga No. 45",
       city: "Bandung",
       province: "Jawa Barat",
@@ -977,5 +1005,7 @@ export const tailors: Tailor[] = [
     phone: "",
     email: "",
     website: "",
+    yearsOfExperience: undefined,
+    distance: undefined,
   },
 ];

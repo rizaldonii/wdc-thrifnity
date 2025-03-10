@@ -32,7 +32,36 @@ export const products: Product[] = [
     materials: [{ name: "Cotton", percentage: 100 }],
     measurements: {},
     careInstructions: ["Machine wash cold", "Do not bleach"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/t-shirt-black-front.jpg",
+        alt: "Black T-Shirt Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/t-shirt-black-back.jpg",
+        alt: "Black T-Shirt Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/t-shirt-white-front.jpg",
+        alt: "White T-Shirt Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/t-shirt-white-back.jpg",
+        alt: "White T-Shirt Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -107,7 +136,36 @@ export const products: Product[] = [
     materials: [{ name: "Denim", percentage: 100 }],
     measurements: {},
     careInstructions: ["Hand wash", "Do not tumble dry"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/jacket-blue-front.jpg",
+        alt: "Blue Denim Jacket Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/jacket-blue-back.jpg",
+        alt: "Blue Denim Jacket Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/jacket-black-front.jpg",
+        alt: "Black Denim Jacket Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/jacket-black-back.jpg",
+        alt: "Black Denim Jacket Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -198,7 +256,36 @@ export const products: Product[] = [
       "Line dry",
       "Iron on low heat",
     ],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/dress-pink-front.jpg",
+        alt: "Pink Floral Dress Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/dress-pink-back.jpg",
+        alt: "Pink Floral Dress Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/dress-blue-front.jpg",
+        alt: "Blue Floral Dress Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/dress-blue-back.jpg",
+        alt: "Blue Floral Dress Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -299,7 +386,36 @@ export const products: Product[] = [
       "Wash inside out",
       "Do not tumble dry",
     ],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/jeans-light-front.jpg",
+        alt: "Light Wash Jeans Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/jeans-light-back.jpg",
+        alt: "Light Wash Jeans Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/jeans-dark-front.jpg",
+        alt: "Dark Wash Jeans Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/jeans-dark-back.jpg",
+        alt: "Dark Wash Jeans Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -379,7 +495,36 @@ export const products: Product[] = [
       "Use leather conditioner",
       "Store in dust bag",
     ],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/bag-tan-front.jpg",
+        alt: "Tan Leather Bag Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/bag-tan-side.jpg",
+        alt: "Tan Leather Bag Side",
+        isPrimary: false,
+        views: "side",
+      },
+      {
+        id: "image3",
+        url: "/images/products/bag-black-front.jpg",
+        alt: "Black Leather Bag Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/bag-black-side.jpg",
+        alt: "Black Leather Bag Side",
+        isPrimary: false,
+        views: "side",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -453,7 +598,6 @@ export const products: Product[] = [
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
-
   {
     id: "6",
     name: "Casual Sneakers",
@@ -472,7 +616,36 @@ export const products: Product[] = [
     ],
     measurements: {},
     careInstructions: ["Wipe with damp cloth", "Air dry"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/sneakers-white-front.jpg",
+        alt: "White Sneakers Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/sneakers-white-side.jpg",
+        alt: "White Sneakers Side",
+        isPrimary: false,
+        views: "side",
+      },
+      {
+        id: "image3",
+        url: "/images/products/sneakers-black-front.jpg",
+        alt: "Black Sneakers Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/sneakers-black-side.jpg",
+        alt: "Black Sneakers Side",
+        isPrimary: false,
+        views: "side",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -546,7 +719,6 @@ export const products: Product[] = [
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
-
   {
     id: "7",
     name: "Wool Blend Coat",
@@ -570,7 +742,36 @@ export const products: Product[] = [
       length: 110,
     },
     careInstructions: ["Dry clean only", "Do not bleach"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/coat-beige-front.jpg",
+        alt: "Beige Coat Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/coat-beige-back.jpg",
+        alt: "Beige Coat Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/coat-navy-front.jpg",
+        alt: "Navy Coat Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/coat-navy-back.jpg",
+        alt: "Navy Coat Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -644,7 +845,6 @@ export const products: Product[] = [
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
-
   {
     id: "8",
     name: "Sporty Leggings",
@@ -668,7 +868,36 @@ export const products: Product[] = [
       length: 95,
     },
     careInstructions: ["Machine wash cold", "Do not bleach", "Line dry"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/leggings-black-front.jpg",
+        alt: "Black Leggings Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/leggings-black-back.jpg",
+        alt: "Black Leggings Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/leggings-gray-front.jpg",
+        alt: "Gray Leggings Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/leggings-gray-back.jpg",
+        alt: "Gray Leggings Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -765,7 +994,36 @@ export const products: Product[] = [
       length: 60,
     },
     careInstructions: ["Dry clean only", "Do not bleach"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/blouse-white-front.jpg",
+        alt: "White Blouse Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/blouse-white-back.jpg",
+        alt: "White Blouse Back",
+        isPrimary: false,
+        views: "back",
+      },
+      {
+        id: "image3",
+        url: "/images/products/blouse-pink-front.jpg",
+        alt: "Pink Blouse Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/blouse-pink-back.jpg",
+        alt: "Pink Blouse Back",
+        isPrimary: false,
+        views: "back",
+      },
+    ],
     variants: [
       {
         id: "variant1",
@@ -854,7 +1112,36 @@ export const products: Product[] = [
     materials: [{ name: "Genuine Leather", percentage: 100 }],
     measurements: {},
     careInstructions: ["Wipe with damp cloth", "Use leather conditioner"],
-    images: [],
+    images: [
+      {
+        id: "image1",
+        url: "/images/products/loafers-brown-front.jpg",
+        alt: "Brown Loafers Front",
+        isPrimary: true,
+        views: "front",
+      },
+      {
+        id: "image2",
+        url: "/images/products/loafers-brown-side.jpg",
+        alt: "Brown Loafers Side",
+        isPrimary: false,
+        views: "side",
+      },
+      {
+        id: "image3",
+        url: "/images/products/loafers-black-front.jpg",
+        alt: "Black Loafers Front",
+        isPrimary: false,
+        views: "front",
+      },
+      {
+        id: "image4",
+        url: "/images/products/loafers-black-side.jpg",
+        alt: "Black Loafers Side",
+        isPrimary: false,
+        views: "side",
+      },
+    ],
     variants: [
       {
         id: "variant1",
