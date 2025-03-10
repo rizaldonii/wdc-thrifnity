@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface ProductPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export async function generateMetadata({
@@ -42,8 +42,7 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const resolvedParams = await params;
-  const product = products.find((p) => p.slug === resolvedParams.slug);
+  const product = products.find((p) => p.slug === params.slug);
 
   if (!product) {
     notFound();
