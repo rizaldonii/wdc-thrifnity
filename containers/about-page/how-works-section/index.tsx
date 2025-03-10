@@ -16,17 +16,25 @@ export default function HowWorks() {
       {/* Content Container */}
       <div className="relative">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="mb-16 text-center max-w-3xl mx-auto">
           <Badge
             variant="outline"
-            className="bg-primary/10 text-primary border-primary/20 mb-3"
+            className="bg-primary/15 text-primary border-primary/20 mb-4"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-primary mr-2.5 animate-pulse" />
             Simple Steps
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            How Thriftinity Works
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            How{" "}
+            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              Thriftinity
+            </span>{" "}
+            Works
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Discover how our platform makes sustainable fashion accessible
+            through a simple and intuitive process.
+          </p>
         </div>
 
         {/* Steps Grid */}

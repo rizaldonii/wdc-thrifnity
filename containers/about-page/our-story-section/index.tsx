@@ -11,17 +11,24 @@ export default function OurStory() {
       {/* Content Container */}
       <div className="relative">
         {/* Section Header */}
-        <div className="mb-10">
+        <div className="mb-16 text-center max-w-3xl mx-auto">
           <Badge
             variant="outline"
-            className="bg-primary/10 text-primary border-primary/20 mb-3"
+            className="bg-primary/15 text-primary border-primary/20 mb-4"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-primary mr-2.5 animate-pulse" />
             Our Journey
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Our Story
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            The Story of{" "}
+            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              Thriftinity
+            </span>
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            From a simple idea to a thriving community, discover how we're
+            transforming the way people think about second-hand fashion.
+          </p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-12 items-center">

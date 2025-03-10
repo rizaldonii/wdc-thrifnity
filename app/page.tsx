@@ -2,7 +2,9 @@ import Slider from "@/containers/home-page/slider-section";
 import Quote from "@/containers/home-page/quote-section";
 import Categories from "@/containers/home-page/categories-section";
 import NewArrivals from "@/containers/home-page/new-arrivals-section";
-import CTA from "@/containers/home-page/cta-section";
+import FeaturedTailors from "@/containers/home-page/featured-tailors-section";
+import About from "@/containers/home-page/about-section";
+import Trade from "@/containers/home-page/trade-section";
 
 export default function Home() {
   return (
@@ -14,10 +16,14 @@ export default function Home() {
         <Quote />
         {/* Categories Section */}
         <Categories />
+        {/* Trade Section */}
+        <Trade />
         {/* New Arrivals Section */}
         <NewArrivals />
-        {/* CTA Section */}
-        <CTA />
+        {/* Featured Tailors Section */}
+        <FeaturedTailors />
+        {/* About Section */}
+        <About />
       </main>
     </div>
   );

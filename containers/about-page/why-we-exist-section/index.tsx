@@ -13,52 +13,24 @@ export default function WhyWeExist() {
       </div>
 
       {/* Section Header */}
-      <div className="relative mb-12">
-        <div className="flex items-center gap-3 mb-4">
-          <Badge
-            variant="outline"
-            className="bg-primary/10 text-primary border-primary/20"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2 animate-pulse" />
-            Our Mission
-          </Badge>
-        </div>
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-          <span className="text-foreground">Why We </span>
-          <span className="relative">
-            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Exist
-            </span>
-            <svg
-              className="absolute -bottom-2 left-0 w-full"
-              height="6"
-              viewBox="0 0 100 6"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,3 C30,3 70,3 100,3"
-                stroke="url(#gradient)"
-                strokeWidth="4"
-                fill="none"
-                strokeLinecap="round"
-              />
-              <defs>
-                <linearGradient id="gradient" gradientTransform="rotate(90)">
-                  <stop
-                    offset="0%"
-                    stopColor="var(--primary)"
-                    stopOpacity="0.3"
-                  />
-                  <stop
-                    offset="100%"
-                    stopColor="var(--primary)"
-                    stopOpacity="0"
-                  />
-                </linearGradient>
-              </defs>
-            </svg>
+      <div className="mb-16 text-center max-w-3xl mx-auto">
+        <Badge
+          variant="outline"
+          className="bg-primary/15 text-primary border-primary/20 mb-4"
+        >
+          <span className="w-2 h-2 rounded-full bg-primary mr-2.5 animate-pulse" />
+          Our Mission
+        </Badge>
+        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          Why We{" "}
+          <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Exist
           </span>
         </h2>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Revolutionizing fashion consumption through sustainable practices and
+          creating a community-driven marketplace for pre-loved clothing.
+        </p>
       </div>
 
       <div className="flex flex-col md:flex-row gap-16 items-center">
