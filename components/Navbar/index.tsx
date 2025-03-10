@@ -226,11 +226,6 @@ export default function Navbar() {
           : "bg-background/50 backdrop-blur-sm"
       )}
     >
-      {/* Announcement Bar */}
-      <div className="bg-primary text-primary-foreground py-2 text-center text-xs sm:text-sm font-medium">
-        <p>Free shipping on all orders over Rp 500.000 • Limited time offer</p>
-      </div>
-
       <nav className="container mx-auto px-4" aria-label="Main navigation">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
