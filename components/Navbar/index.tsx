@@ -5,400 +5,316 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
-  X,
-  Sun,
-  Moon,
   Heart,
-  Bell,
-  Mail,
   ShoppingCart,
-  Menu,
   User,
-  LogOut,
+  Scissors,
+  Repeat2,
+  Users,
+  Menu,
+  X,
+  Bell,
+  ChevronDown,
 } from "lucide-react";
-import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ThemeToggle";
 
-// NavIconButton component with improved styling
-interface NavIconButtonProps {
-  icon: React.ReactNode;
+const navItems = [
+  {
+    label: "Shop",
+    href: "/products",
+    icon: ShoppingCart,
+  },
+  {
+    label: "Tailors",
+    href: "/tailors",
+    icon: Scissors,
+  },
+  {
+    label: "Trade",
+    href: "/trade",
+    icon: Repeat2,
+  },
+  {
+    label: "Community",
+    href: "/community",
+    icon: Users,
+  },
+];
+
+interface NavLinkProps {
+  href: string;
+  icon: React.ElementType;
   label: string;
-  count?: number;
+  isActive: boolean;
+  featured?: boolean;
 }
 
-const NavIconButton = ({ icon, label, count = 0 }: NavIconButtonProps) => {
+const NavLink = ({
+  href,
+  icon: Icon,
+  label,
+  isActive,
+  featured,
+}: NavLinkProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <button
-      className="relative group flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary/20 transition-all duration-300"
-      aria-label={label}
+    <div
+      className="relative"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
     >
-      <div className="relative">
-        {icon}
-        {count > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[18px] h-[18px] text-[10px] font-medium bg-rose-500 text-white rounded-full px-1 border border-white">
-            {count}
-          </span>
+      <Link
+        href={href}
+        className={cn(
+          "relative px-4 py-2 rounded-full transition-all duration-300",
+          "hover:bg-primary/10 dark:hover:bg-primary/20",
+          "flex items-center gap-2",
+          isActive && "text-primary dark:text-primary font-medium",
+          featured && "bg-primary/5"
         )}
-      </div>
-      <span className="absolute top-full mt-1 opacity-0 group-hover:opacity-100 text-[10px] font-medium text-foreground bg-white/90 backdrop-blur-md shadow-md px-2 py-1 rounded-md transition-opacity duration-200 pointer-events-none whitespace-nowrap dark:bg-background/90">
-        {label}
-      </span>
-    </button>
-  );
-};
-
-// Mobile menu item with improved styling
-interface MobileMenuItemProps {
-  icon: React.ReactNode;
-  label: string;
-  count?: number;
-}
-
-const MobileMenuItem = ({ icon, label, count = 0 }: MobileMenuItemProps) => {
-  return (
-    <Link
-      href="#"
-      className="flex items-center justify-between p-3 rounded-xl bg-primary/5 hover:bg-primary/10 transition-all duration-200"
-    >
-      <div className="flex items-center gap-3">
-        <div className="w-8 h-8 flex items-center justify-center text-primary dark:text-foreground">
-          {icon}
-        </div>
-        <span className="text-primary-dark font-medium dark:text-foreground">
+      >
+        <Icon className="w-4 h-4" />
+        <span className={cn("text-sm", featured && "font-medium")}>
           {label}
         </span>
-      </div>
-      {count > 0 && (
-        <span className="flex items-center justify-center min-w-[20px] h-[20px] text-xs font-medium bg-rose-500 text-white rounded-full px-1">
-          {count}
-        </span>
-      )}
-    </Link>
+        {isActive && (
+          <motion.div
+            layoutId="activeTab"
+            className="absolute inset-0 bg-primary/10 dark:bg-primary/20 rounded-full -z-10"
+            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+          />
+        )}
+      </Link>
+    </div>
   );
 };
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const pathname = usePathname();
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Toggle theme
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  // Check if it's light mode
-  const isLightMode = theme !== "dark";
+  const iconButtonClasses = cn(
+    "p-2 rounded-full transition-all duration-300",
+    "hover:bg-primary/10 dark:hover:bg-primary/20",
+    "relative flex items-center justify-center"
+  );
 
   return (
-    <div
-      className={`sticky top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "backdrop-blur-xl bg-white/95 dark:bg-background/85 shadow-lg shadow-primary/10 border-b border-primary/10 dark:border-primary/5"
-          : isLightMode
-          ? "bg-gradient-to-r from-white/95 via-white/90 to-white/95"
-          : "bg-gradient-to-r from-background/70 via-background/60 to-background/70"
-      } before:absolute before:inset-0 before:w-full before:h-full before:bg-gradient-to-b before:from-primary/5 before:to-transparent before:dark:from-primary/10 before:pointer-events-none`}
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled
+          ? "bg-background/90 backdrop-blur-xl border-b shadow-sm"
+          : "bg-background/50 backdrop-blur-sm"
+      )}
     >
-      {/* Ambient light effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute -left-4 top-1/2 w-64 h-64 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl opacity-50 animate-pulse mix-blend-multiply dark:mix-blend-overlay"
-          style={{ animationDuration: "8s" }}
-        />
-        <div
-          className="absolute -right-4 top-0 w-64 h-64 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl opacity-50 animate-pulse mix-blend-multiply dark:mix-blend-overlay"
-          style={{ animationDuration: "12s" }}
-        />
+      {/* Announcement Bar */}
+      <div className="bg-primary text-primary-foreground py-2 text-center text-xs font-medium">
+        <p>Free shipping on all orders over Rp 500.000 • Limited time offer</p>
       </div>
-      <nav
-        className={`container relative max-w-7xl mx-auto px-4 sm:px-6 py-1 ${
-          scrolled
-            ? isLightMode
-              ? "bg-gradient-to-r from-white/80 to-primary/5 border border-primary/10"
-              : "bg-[var(--color-accent)]/95"
-            : isLightMode
-            ? "bg-gradient-to-r from-white/90 to-primary/5 border border-primary/10"
-            : "bg-gradient-to-r from-[var(--color-accent)]/80 to-[var(--color-secondary)]/80"
-        } backdrop-blur-md rounded-xl transition-all duration-300 shadow-blue`}
-      >
-        <div className="flex items-center justify-between h-16">
-          {/* Logo + Title */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 transition-all duration-300 hover:scale-105 group"
-          >
-            <div className="relative w-[38px] h-[38px] sm:w-[42px] sm:h-[42px] md:w-[45px] md:h-[45px]">
-              <Image
-                src="/LOGO.svg"
-                alt="Thriftnity"
-                fill
-                className="object-contain drop-shadow-md group-hover:drop-shadow-lg transition-all"
-                sizes="(max-width: 640px) 38px, (max-width: 768px) 42px, 45px"
-                priority
-              />
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-xl sm:text-2xl md:text-2xl font-bold text-primary-dark dark:text-foreground tracking-tight leading-none">
-                Thriftnity
-              </h1>
-              <span className="text-[10px] text-primary/70 dark:text-muted-foreground tracking-widest uppercase -mt-0.5">
-                Fashion Redefined
-              </span>
-            </div>
+
+      <nav className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between gap-4">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Image
+              src="/LOGO.svg"
+              alt="Thriftnity"
+              width={40}
+              height={40}
+              className="w-8 h-8"
+              priority
+            />
+            <span className="font-bold text-xl tracking-tight">Thriftnity</span>
           </Link>
 
-          {/* Search Bar */}
-          <div className="hidden sm:block flex-1 max-w-xl mx-4">
-            <div
-              className={`relative backdrop-blur-md transition-all duration-300 ${
-                isSearchFocused
-                  ? "bg-white shadow-md ring-2 ring-primary dark:bg-[var(--color-accent)]/95 dark:ring-[var(--color-primary-light)] transform scale-[1.02]"
-                  : "bg-white/90 hover:bg-white dark:bg-[var(--color-accent)]/85 dark:hover:bg-[var(--color-accent)]/90 ring-1 ring-primary/30 hover:ring-primary/60 dark:ring-[var(--color-primary-light)]/20 dark:hover:ring-[var(--color-primary-light)]/40"
-              } rounded-xl overflow-hidden group hover:shadow-md`}
-            >
-              <div className="flex items-center px-4 py-2.5">
-                <Search
-                  className={`w-5 h-5 mr-3 transition-colors duration-200 ${
-                    isSearchFocused
-                      ? "text-primary dark:text-[var(--color-primary-light)]"
-                      : "text-muted group-hover:text-primary dark:text-[var(--text-subtle)] dark:group-hover:text-[var(--color-primary-light)]"
-                  }`}
-                />
-                <input
-                  type="text"
-                  placeholder="Cari produk thrift..."
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                  className="w-full py-1.5 bg-transparent focus:outline-none text-primary-dark dark:text-[var(--text-primary)] placeholder:text-muted/90 dark:placeholder:text-[var(--text-subtle)]/75 transition-colors"
-                  onFocus={() => setIsSearchFocused(true)}
-                  onBlur={() => setIsSearchFocused(false)}
-                />
-                {searchValue && (
-                  <button
-                    className={`ml-2 p-1.5 rounded-lg transition-all duration-200 ${
-                      isSearchFocused
-                        ? "bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary-dark"
-                        : "bg-muted/10 hover:bg-primary/10 text-muted hover:text-primary"
-                    }`}
-                    aria-label="Clear search"
-                    onClick={() => setSearchValue("")}
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            </div>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-2">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.href}
+                {...item}
+                isActive={
+                  pathname === item.href || pathname.startsWith(`${item.href}/`)
+                }
+              />
+            ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            {/* Search button for mobile */}
-            <button
-              className="sm:hidden relative p-2 rounded-full hover:bg-primary/15 transition-colors duration-200"
-              onClick={() => setIsSearchFocused(!isSearchFocused)}
-              aria-label="Search"
-            >
-              <Search className="w-5 h-5 text-primary-dark dark:text-foreground" />
-            </button>
-
-            {/* Theme toggle */}
-            <button
-              className="relative p-2 rounded-full hover:bg-primary/15 transition-colors duration-200"
-              onClick={toggleTheme}
-              aria-label={
-                theme === "dark"
-                  ? "Switch to light mode"
-                  : "Switch to dark mode"
-              }
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-foreground" />
+          {/* Right Side Icons */}
+          <div className="flex items-center gap-1 md:gap-2">
+            {/* Search */}
+            <AnimatePresence>
+              {isSearchOpen ? (
+                <motion.div
+                  initial={{ width: 40, opacity: 0 }}
+                  animate={{ width: 200, opacity: 1 }}
+                  exit={{ width: 40, opacity: 0 }}
+                  className="flex items-center bg-muted rounded-full overflow-hidden px-3"
+                >
+                  <Search className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="bg-transparent border-none focus:outline-none py-2 px-2 w-full text-sm"
+                    autoFocus
+                  />
+                  <button
+                    onClick={() => setIsSearchOpen(false)}
+                    className="focus:outline-none flex-shrink-0"
+                  >
+                    <X className="w-4 h-4 text-muted-foreground" />
+                  </button>
+                </motion.div>
               ) : (
-                <Moon className="w-5 h-5 text-primary-dark" />
+                <button
+                  className={iconButtonClasses}
+                  aria-label="Search"
+                  onClick={() => setIsSearchOpen(true)}
+                >
+                  <Search className="w-5 h-5" />
+                </button>
               )}
-            </button>
+            </AnimatePresence>
 
-            {/* Desktop Icons */}
-            <div className="hidden md:flex items-center gap-1 lg:gap-2">
-              <NavIconButton
-                icon={
-                  <Heart className="w-5 h-5 text-primary-dark dark:text-foreground" />
-                }
-                label="Wishlist"
-                count={3}
-              />
-              <NavIconButton
-                icon={
-                  <Bell className="w-5 h-5 text-primary-dark dark:text-foreground" />
-                }
-                label="Notifikasi"
-                count={2}
-              />
-              <NavIconButton
-                icon={
-                  <Mail className="w-5 h-5 text-primary-dark dark:text-foreground" />
-                }
-                label="Pesan"
-                count={5}
-              />
-              <NavIconButton
-                icon={
-                  <ShoppingCart className="w-5 h-5 text-primary-dark dark:text-foreground" />
-                }
-                label="Keranjang"
-                count={1}
-              />
-            </div>
+            {/* Wishlist */}
+            <Link href="/wishlist" className={iconButtonClasses}>
+              <Heart className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-[10px] text-primary-foreground rounded-full flex items-center justify-center font-medium">
+                2
+              </span>
+            </Link>
 
-            {/* User Avatar - Desktop */}
-            <button
-              className="hidden md:flex relative items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-200"
-              aria-label="Profile"
-            >
-              <div className="relative w-7 h-7 rounded-full overflow-hidden border border-primary/30">
-                <Image
-                  src="/placeholder.svg?height=28&width=28"
-                  alt="User Avatar"
-                  fill
-                  className="object-cover"
-                  sizes="28px"
-                />
-              </div>
-              <span className="text-sm font-medium text-primary-dark dark:text-foreground">
-                Account
+            {/* Cart */}
+            <Link href="/cart" className={iconButtonClasses}>
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-[10px] text-primary-foreground rounded-full flex items-center justify-center font-medium">
+                3
+              </span>
+            </Link>
+
+            {/* Notifications */}
+            <button className={cn(iconButtonClasses, "hidden sm:flex")}>
+              <Bell className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-[10px] text-primary-foreground rounded-full flex items-center justify-center font-medium">
+                5
               </span>
             </button>
 
-            {/* Mobile menu toggle */}
-            <button
-              className="md:hidden menu-button p-2 rounded-full hover:bg-primary/15 transition-colors duration-200"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            {/* Theme Toggle - Replaced with ThemeToggle component */}
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
+
+            {/* Profile */}
+            <Link
+              href="/profile"
+              className={cn(iconButtonClasses, "hidden sm:flex")}
             >
-              {isMenuOpen ? (
-                <X className="w-6 h-6 text-primary-dark dark:text-foreground" />
-              ) : (
-                <Menu className="w-6 h-6 text-primary-dark dark:text-foreground" />
-              )}
+              <User className="w-5 h-5" />
+            </Link>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={cn("md:hidden", iconButtonClasses)}
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={isMobileMenuOpen ? "close" : "open"}
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isMobileMenuOpen ? (
+                    <X className="w-5 h-5" />
+                  ) : (
+                    <Menu className="w-5 h-5" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </button>
           </div>
         </div>
 
-        {/* Mobile Search Bar - Slide down when active */}
+        {/* Mobile Menu */}
         <AnimatePresence>
-          {isSearchFocused && (
+          {isMobileMenuOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="sm:hidden overflow-hidden pb-3"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden overflow-hidden"
             >
-              <div className="bg-white/80 dark:bg-primary/10 backdrop-blur-md rounded-full overflow-hidden shadow-md border border-primary/20">
-                <div className="relative flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Cari produk thrift..."
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    className="w-full py-2.5 px-5 pr-12 rounded-full text-primary-dark dark:text-foreground bg-transparent focus:outline-none placeholder:text-muted-foreground"
-                    autoFocus
-                  />
-                  <button
-                    className="absolute right-4 text-primary/70 hover:text-primary transition-colors duration-200 dark:text-muted-foreground dark:hover:text-foreground"
-                    aria-label="Search"
+              <div className="flex flex-col gap-1 py-4">
+                {navItems.map((item) => (
+                  <div key={item.href} className="flex flex-col">
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "flex items-center justify-between px-4 py-3 rounded-lg",
+                        "hover:bg-primary/5 dark:hover:bg-primary/10",
+                        "transition-all duration-300",
+                        pathname === item.href &&
+                          "bg-primary/10 dark:bg-primary/20 font-medium"
+                      )}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <item.icon className="w-5 h-5" />
+                        <span>{item.label}</span>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+
+                <div className="mt-4 pt-4 border-t grid grid-cols-3 gap-2">
+                  <Link
+                    href="/profile"
+                    className="flex flex-col items-center justify-center gap-1 p-3 rounded-lg hover:bg-muted"
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Search className="w-5 h-5" />
-                  </button>
+                    <User className="w-5 h-5" />
+                    <span className="text-xs">Profile</span>
+                  </Link>
+                  <Link
+                    href="/notifications"
+                    className="flex flex-col items-center justify-center gap-1 p-3 rounded-lg hover:bg-muted"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Bell className="w-5 h-5" />
+                    <span className="text-xs">Alerts</span>
+                  </Link>
+
+                  {/* Theme Toggle in Mobile Menu */}
+                  <div
+                    className="flex flex-col items-center justify-center gap-1 p-3 rounded-lg hover:bg-muted"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <ThemeToggle isMobile={true} />
+                  </div>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </nav>
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mobile-menu absolute left-0 right-0 mt-2 mx-4 z-50 overflow-hidden rounded-2xl shadow-xl"
-          >
-            <div className="bg-white/95 dark:bg-background/95 backdrop-blur-xl p-4 border border-primary/10">
-              {/* User profile in mobile menu */}
-              <div className="flex items-center gap-3 p-3 mb-3 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10">
-                <div className="relative w-10 h-10 rounded-full border border-primary/30">
-                  <Image
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="User Avatar"
-                    fill
-                    className="object-cover rounded-full"
-                  />
-                </div>
-                <div>
-                  <span className="text-primary-dark dark:text-foreground font-medium">
-                    Pengguna Thriftnity
-                  </span>
-                  <p className="text-primary/70 dark:text-muted-foreground text-sm">
-                    pengguna@email.com
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <MobileMenuItem
-                  icon={<Heart className="w-5 h-5" />}
-                  label="Wishlist"
-                  count={3}
-                />
-                <MobileMenuItem
-                  icon={<Bell className="w-5 h-5" />}
-                  label="Notifikasi"
-                  count={2}
-                />
-                <MobileMenuItem
-                  icon={<Mail className="w-5 h-5" />}
-                  label="Pesan"
-                  count={5}
-                />
-                <MobileMenuItem
-                  icon={<ShoppingCart className="w-5 h-5" />}
-                  label="Keranjang"
-                  count={1}
-                />
-                <MobileMenuItem
-                  icon={<User className="w-5 h-5" />}
-                  label="Profil"
-                  count={0}
-                />
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-primary/20">
-                <button className="w-full flex items-center gap-3 text-white p-3 rounded-xl bg-rose-500/90 hover:bg-rose-500 transition-colors duration-200 shadow-sm">
-                  <LogOut className="w-5 h-5" />
-                  <span className="text-sm font-medium">Keluar</span>
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    </header>
   );
 }
