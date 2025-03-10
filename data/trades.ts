@@ -11,13 +11,6 @@ export const trades: Trade[] = [
       user: users[0],
       offeredProduct: {
         ...products[0],
-        images: [
-          {
-            id: "img-001",
-            url: "/images/products/vintage-jacket.webp",
-            alt: "Vintage Denim Jacket",
-          },
-        ],
       },
       interestedProducts: [products[3], products[4]],
     },
@@ -32,13 +25,6 @@ export const trades: Trade[] = [
       user: users[2],
       offeredProduct: {
         ...products[5],
-        images: [
-          {
-            id: "img-006",
-            url: "/images/products/designer-bag.webp",
-            alt: "Designer Handbag",
-          },
-        ],
       },
       interestedProducts: [products[7]],
     },
@@ -65,15 +51,8 @@ export const trades: Trade[] = [
       user: users[4], // David Kumar
       offeredProduct: {
         ...products[9],
-        images: [
-          {
-            id: "img-011",
-            url: "/images/products/summer-dress.webp",
-            alt: "Summer Dress",
-          },
-        ],
       },
-      interestedProducts: [products[10]],
+      interestedProducts: [products[1]],
     },
     createdAt: "2024-03-07T14:20:00Z",
     updatedAt: "2024-03-08T16:30:00Z",

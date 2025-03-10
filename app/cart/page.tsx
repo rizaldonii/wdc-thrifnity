@@ -1,31 +1,31 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  ShoppingBag,
-  Plus,
-  Minus,
-  X,
-  ArrowLeft,
-  Package,
-  Truck,
-  CreditCard,
-  Heart,
-  Clock,
-  Gift,
-  ChevronRight,
-} from "lucide-react";
-import { useTheme } from "next-themes";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { CartItem, useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
-import { useCart, CartItem } from "@/hooks/use-cart";
-import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowLeft,
+  ChevronRight,
+  Clock,
+  CreditCard,
+  Gift,
+  Heart,
+  Minus,
+  Package,
+  Plus,
+  ShoppingBag,
+  Truck,
+  X,
+} from "lucide-react";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function CartPage() {
   const { theme } = useTheme();
@@ -195,7 +195,7 @@ export default function CartPage() {
                                       <p className="text-sm text-muted-foreground mt-1">
                                         Item Price:{" "}
                                         <span className="font-medium">
-                                          ${item.product.price.toFixed(2)}
+                                          Rp{item.product.price.toFixed(2)}
                                         </span>
                                       </p>
                                       <div className="flex items-center text-xs text-muted-foreground mt-2">
@@ -257,7 +257,7 @@ export default function CartPage() {
                                       Total
                                     </p>
                                     <p className="font-medium text-lg">
-                                      $
+                                      Rp
                                       {(
                                         item.product.price * item.quantity
                                       ).toFixed(2)}
@@ -300,7 +300,7 @@ export default function CartPage() {
                           <h4 className="text-sm font-medium truncate">
                             Recommended Product {i}
                           </h4>
-                          <p className="text-sm text-primary">$49.99</p>
+                          <p className="text-sm text-primary">Rp49.999</p>
                         </div>
                       ))}
                     </div>
@@ -317,14 +317,14 @@ export default function CartPage() {
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Subtotal</span>
                         <span className="font-medium">
-                          ${cart.summary.subtotal.toFixed(2)}
+                          Rp{cart.summary.subtotal.toFixed(2)}
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Shipping</span>
                         {remainingForFreeShipping > 0 ? (
                           <span className="font-medium">
-                            ${cart.summary.shipping.toFixed(2)}
+                            Rp{cart.summary.shipping.toFixed(2)}
                           </span>
                         ) : (
                           <span className="text-green-500 font-medium">
@@ -335,13 +335,13 @@ export default function CartPage() {
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Tax</span>
                         <span className="font-medium">
-                          ${cart.summary.tax.toFixed(2)}
+                          Rp{cart.summary.tax.toFixed(2)}
                         </span>
                       </div>
                       <Separator className="my-4" />
                       <div className="flex justify-between font-medium text-xl">
                         <span>Total</span>
-                        <span>${cart.summary.total.toFixed(2)}</span>
+                        <span>Rp{cart.summary.total.toFixed(2)}</span>
                       </div>
                     </div>
 
@@ -357,7 +357,7 @@ export default function CartPage() {
                         <p className="text-sm mb-3 text-green-700 dark:text-green-300">
                           Add{" "}
                           <span className="font-bold">
-                            ${remainingForFreeShipping.toFixed(2)}
+                            Rp{remainingForFreeShipping.toFixed(2)}
                           </span>{" "}
                           more to qualify
                         </p>
@@ -388,7 +388,7 @@ export default function CartPage() {
                             <div>
                               <h4 className="font-medium">Free Shipping</h4>
                               <p className="text-sm text-muted-foreground">
-                                On all orders over $100
+                                On all orders over Rp100.000
                               </p>
                             </div>
                           </div>

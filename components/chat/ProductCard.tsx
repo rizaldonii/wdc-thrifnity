@@ -1,8 +1,8 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Tag } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 
 interface ProductCardProps {
   product: {
@@ -45,7 +45,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </h3>
         <div className="flex justify-between items-center mt-1">
           <p className="text-[#1D9BF0] font-semibold text-sm sm:text-base">
-            ${product.price.toFixed(2)}
+            Rp{product.price.toFixed(3)}
           </p>
           <motion.button
             whileTap={{ scale: 0.95 }}

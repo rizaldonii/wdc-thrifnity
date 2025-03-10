@@ -1,31 +1,31 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  SetStateAction,
-} from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
+import {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 // Enhanced slider content with more properties
 const slides = [
   {
     id: "slide1",
     image: {
-      light: "/images/slides/summer-light.webp",
-      dark: "/images/slides/summer-dark.webp",
+      light: "/shop/summer collection.jpg",
+      dark: "/shop/summer collection.jpg",
     },
     mobileImage: {
-      light: "/images/slides/summer-mobile-light.webp",
-      dark: "/images/slides/summer-mobile-dark.webp",
+      light: "/shop/summer collection.jpg",
+      dark: "/shop/summer collection.jpg",
     },
     title: "Summer Collection",
     subtitle: "Discover our latest arrivals for the season",
@@ -44,12 +44,12 @@ const slides = [
   {
     id: "slide2",
     image: {
-      light: "/images/slides/discount-light.webp",
-      dark: "/images/slides/discount-dark.webp",
+      light: "/shop/exclusive discounts.jpg",
+      dark: "/shop/exclusive discounts.jpg",
     },
     mobileImage: {
-      light: "/images/slides/discount-mobile-light.webp",
-      dark: "/images/slides/discount-mobile-dark.webp",
+      light: "/shop/exclusive discounts.jpg",
+      dark: "/shop/exclusive discounts.jpg",
     },
     title: "Exclusive Discounts",
     subtitle: "Up to 50% off on selected items",
@@ -69,12 +69,12 @@ const slides = [
   {
     id: "slide3",
     image: {
-      light: "/images/slides/sustainable-light.webp",
-      dark: "/images/slides/sustainable-dark.webp",
+      light: "/shop/eco friendly clothing.jpg",
+      dark: "/shop/eco friendly clothing.jpg",
     },
     mobileImage: {
-      light: "/images/slides/sustainable-mobile-light.webp",
-      dark: "/images/slides/sustainable-mobile-dark.webp",
+      light: "/shop/eco friendly clothing.jpg",
+      dark: "/shop/eco friendly clothing.jpg",
     },
     title: "Sustainable Fashion",
     subtitle: "Eco-friendly clothing for a better tomorrow",
@@ -306,7 +306,7 @@ export default function HeroSlider() {
                 className={cn(
                   "max-w-lg space-y-6",
                   slides[currentSlide].align === "center" &&
-                    "mx-auto text-center",
+                  "mx-auto text-center",
                   slides[currentSlide].align === "right" && "ml-auto text-right"
                 )}
               >
@@ -411,8 +411,8 @@ export default function HeroSlider() {
                   currentSlide === index
                     ? "transparent"
                     : theme === "dark"
-                    ? "rgba(255, 255, 255, 0.3)"
-                    : "rgba(0, 0, 0, 0.3)",
+                      ? "rgba(255, 255, 255, 0.3)"
+                      : "rgba(0, 0, 0, 0.3)",
               }}
               aria-label={`Go to slide ${index + 1}`}
               aria-current={currentSlide === index ? "true" : "false"}

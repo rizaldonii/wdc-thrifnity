@@ -1,24 +1,23 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Bell,
+  Heart,
+  Menu,
+  Repeat2,
+  Scissors,
+  Search,
+  ShoppingCart,
+  User,
+  X
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search,
-  Heart,
-  ShoppingCart,
-  User,
-  Scissors,
-  Repeat2,
-  Users,
-  Menu,
-  X,
-  Bell,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import ThemeToggle from "@/components/ThemeToggle";
+import { useCallback, useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
 
 // Define nav items in a separate constant for better maintainability
@@ -422,7 +421,7 @@ export default function Navbar() {
             >
               <Heart className="w-5 h-5" aria-hidden="true" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-[10px] text-primary-foreground rounded-full flex items-center justify-center font-medium">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-[10px] text-gray-50 rounded-full flex items-center justify-center font-medium">
                   {wishlistCount}
                 </span>
               )}
@@ -436,7 +435,7 @@ export default function Navbar() {
             >
               <ShoppingCart className="w-5 h-5" aria-hidden="true" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-[10px] text-primary-foreground rounded-full flex items-center justify-center font-medium">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-[10px] text-gray-50 rounded-full flex items-center justify-center font-medium">
                   {cartCount}
                 </span>
               )}
@@ -450,7 +449,7 @@ export default function Navbar() {
             >
               <Bell className="w-5 h-5" aria-hidden="true" />
               {notificationCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-[10px] text-primary-foreground rounded-full flex items-center justify-center font-medium">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-[10px] text-gray-50 rounded-full flex items-center justify-center font-medium">
                   {notificationCount}
                 </span>
               )}
@@ -554,7 +553,7 @@ export default function Navbar() {
                         "hover:bg-primary/5 dark:hover:bg-primary/10",
                         "transition-all duration-300",
                         pathname === item.href &&
-                          "bg-primary/10 dark:bg-primary/20 font-medium"
+                        "bg-primary/10 dark:bg-primary/20 font-medium"
                       )}
                       onClick={() => setIsMobileMenuOpen(false)}
                       aria-current={pathname === item.href ? "page" : undefined}

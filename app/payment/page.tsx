@@ -1,34 +1,34 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCart } from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowLeft,
-  CreditCard,
-  ShieldCheck,
-  Truck,
-  LockKeyhole,
-  CheckCircle2,
   Building,
-  Globe,
+  CheckCircle2,
   ChevronDown,
   ChevronRight,
   Clock,
+  CreditCard,
+  Globe,
+  LockKeyhole,
+  ShieldCheck,
+  Truck,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
-import { useCart } from "@/hooks/use-cart";
-import { useEffect, useState } from "react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function PaymentPage() {
   const { theme } = useTheme();
@@ -69,6 +69,17 @@ export default function PaymentPage() {
     e.target.value = formattedValue;
   };
 
+  // 1. Update the formatPrice function
+  const formatPrice = (value: number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
+
   useEffect(() => {
     // Handle hydration
     setIsHydrated(true);
@@ -79,30 +90,31 @@ export default function PaymentPage() {
   }
 
   // Calculate the remaining amount for free shipping
-  const freeShippingThreshold = 100;
+  const freeShippingThreshold = 1500000;
   const remainingForFreeShipping = Math.max(
     0,
     freeShippingThreshold - cart.summary.subtotal
   );
 
+  // Update the shipping methods prices
   const shippingMethods = [
     {
       id: "standard",
       name: "Standard Shipping",
-      price: remainingForFreeShipping > 0 ? 4.99 : 0,
+      price: remainingForFreeShipping > 0 ? 75000 : 0,
       time: "3-5 business days",
       isFree: remainingForFreeShipping <= 0,
     },
     {
       id: "express",
       name: "Express Shipping",
-      price: 9.99,
+      price: 150000,
       time: "1-2 business days",
     },
     {
       id: "overnight",
       name: "Overnight Shipping",
-      price: 19.99,
+      price: 300000,
       time: "Next business day",
     },
   ];
@@ -116,7 +128,7 @@ export default function PaymentPage() {
     const subtotal = cart.summary.subtotal;
     const shipping = getShippingPrice();
     const tax = subtotal * 0.08; // Assuming 8% tax rate
-    return (subtotal + shipping + tax).toFixed(2);
+    return formatPrice(subtotal + shipping + tax);
   };
 
   return (
@@ -372,7 +384,7 @@ export default function PaymentPage() {
                                 Free
                               </span>
                             ) : (
-                              <span>${method.price.toFixed(2)}</span>
+                              <span>Rp{method.price.toLocaleString('id-ID')}</span>
                             )}
                           </div>
                         </div>
@@ -659,9 +671,9 @@ export default function PaymentPage() {
                               (m) => m.id === shippingMethod
                             )?.isFree
                               ? "Free"
-                              : `$${shippingMethods
-                                  .find((m) => m.id === shippingMethod)
-                                  ?.price.toFixed(2)}`}
+                              : `Rp${shippingMethods
+                                .find((m) => m.id === shippingMethod)
+                                ?.price.toLocaleString('id-ID')}`}
                           </span>
                         </div>
                       </div>
@@ -691,10 +703,7 @@ export default function PaymentPage() {
                                     {item.product.name}
                                   </h4>
                                   <span>
-                                    $
-                                    {(
-                                      item.product.price * item.quantity
-                                    ).toFixed(2)}
+                                    Rp{(item.product.price * item.quantity).toLocaleString('id-ID')}
                                   </span>
                                 </div>
                                 <div className="text-sm text-muted-foreground mt-1">
@@ -702,8 +711,7 @@ export default function PaymentPage() {
                                     <span>Size: {item.selectedSize} · </span>
                                   )}
                                   <span>
-                                    Qty: {item.quantity} × $
-                                    {item.product.price.toFixed(2)}
+                                    Qty: {item.quantity} × Rp{item.product.price.toLocaleString('id-ID')}
                                   </span>
                                 </div>
                               </div>
@@ -771,7 +779,7 @@ export default function PaymentPage() {
                           {item.quantity} × {item.product.name}
                         </span>
                         <span className="font-medium">
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          Rp{(item.product.price * item.quantity).toLocaleString('id-ID')}
                         </span>
                       </div>
                     ))}
@@ -783,7 +791,7 @@ export default function PaymentPage() {
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Subtotal</span>
                       <span className="font-medium">
-                        ${cart.summary.subtotal.toFixed(2)}
+                        Rp{cart.summary.subtotal.toLocaleString('id-ID')}
                       </span>
                     </div>
                     <div className="flex justify-between">
@@ -793,24 +801,23 @@ export default function PaymentPage() {
                         <span className="text-green-500 font-medium">Free</span>
                       ) : (
                         <span className="font-medium">
-                          $
-                          {shippingMethods
+                          Rp{shippingMethods
                             .find((m) => m.id === shippingMethod)
-                            ?.price.toFixed(2)}
+                            ?.price.toLocaleString('id-ID')}
                         </span>
                       )}
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Tax (8%)</span>
                       <span className="font-medium">
-                        ${(cart.summary.subtotal * 0.08).toFixed(2)}
+                        Rp{(cart.summary.subtotal * 0.08).toLocaleString('id-ID')}
                       </span>
                     </div>
 
                     <div className="pt-3 mt-3 border-t dark:border-neutral-700">
                       <div className="flex justify-between font-medium text-lg">
                         <span>Total</span>
-                        <span>${calculateTotal()}</span>
+                        <span>{calculateTotal()}</span>
                       </div>
                       <p className="text-xs text-muted-foreground mt-1 text-right">
                         Including tax & shipping
@@ -833,7 +840,7 @@ export default function PaymentPage() {
                       <span className="text-sm font-medium">Currency</span>
                     </div>
                     <select className="bg-transparent text-sm font-medium border-none focus:outline-none focus:ring-0">
-                      <option value="USD">USD ($)</option>
+                      <option value="IDR">IDR (Rp)</option>
                       <option value="EUR">EUR (€)</option>
                       <option value="GBP">GBP (£)</option>
                     </select>
