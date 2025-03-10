@@ -38,11 +38,6 @@ const NAV_ITEMS = [
     href: "/trade",
     icon: Repeat2,
   },
-  {
-    label: "Community",
-    href: "/community",
-    icon: Users,
-  },
 ];
 
 // Popular categories and recent searches for better reusability
@@ -448,7 +443,8 @@ export default function Navbar() {
             </Link>
 
             {/* Notifications */}
-            <button
+            <Link
+              href="/chat"
               className={cn(iconButtonClasses, "hidden sm:flex")}
               aria-label={`Notifications (${notificationCount} unread)`}
             >
@@ -458,7 +454,7 @@ export default function Navbar() {
                   {notificationCount}
                 </span>
               )}
-            </button>
+            </Link>
 
             {/* Theme Toggle */}
             <div className="hidden sm:block">
@@ -467,11 +463,23 @@ export default function Navbar() {
 
             {/* Profile */}
             <Link
-              href="/profile"
+              href=""
               className={cn(iconButtonClasses, "hidden sm:flex")}
               aria-label="My Profile"
             >
               <User className="w-5 h-5" aria-hidden="true" />
+            </Link>
+
+            <Link
+              href="/upload-product"
+              className={cn(
+                "hidden sm:flex items-center gap-2 px-4 py-2",
+                "bg-primary text-primary-foreground rounded-full",
+                "hover:bg-primary/90 transition-colors duration-200",
+                "font-medium text-sm"
+              )}
+            >
+              Sale or Trade
             </Link>
 
             {/* Mobile Menu Button */}
