@@ -1,16 +1,17 @@
 "use client";
 
-import { ProductFilterProvider } from "@/context/product-filter-context";
+import HeroSlider from "@/containers/product-page/hero-slider-section";
+import FeaturedProducts from "@/containers/product-page/featured-products-section";
+import PromoProducts from "@/containers/product-page/promo-products-section";
 import AllProducts from "@/containers/product-page/all-product-section";
-import Hero from "@/containers/product-page/hero-section";
 
 export default function Products() {
   return (
-    <ProductFilterProvider>
-      <main className="min-h-screen bg-background">
-        <Hero />
-        <AllProducts />
-      </main>
-    </ProductFilterProvider>
+    <main className="min-h-screen bg-background">
+      <HeroSlider />
+      <FeaturedProducts />
+      <PromoProducts />
+      <AllProducts />
+    </main>
   );
 }
