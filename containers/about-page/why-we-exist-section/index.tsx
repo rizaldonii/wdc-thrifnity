@@ -78,7 +78,7 @@ export default function WhyWeExist() {
           <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000" />
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/why-we-exist.svg"
+              src="/clothing collection.jpg"
               alt="Sustainable clothing collection"
               width={500}
               height={500}
