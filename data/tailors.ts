@@ -5,8 +5,8 @@ export const tailors: Tailor[] = [
     id: "t1",
     name: "Rina's Fashion Studio",
     slug: "rinas-fashion-studio",
-    avatar: "/tailors/rina-avatar.jpg",
-    coverImage: "/tailors/rina-studio.jpg",
+    avatar: "/tailors/rina-avatar.webp",
+    coverImage: "/tailors/rina-studio.webp",
     description:
       "With over 15 years of experience in fashion alteration and custom clothing, we specialize in creating the perfect fit for any garment.",
     specialty: [
@@ -135,8 +135,8 @@ export const tailors: Tailor[] = [
     id: "t2",
     name: "Ahmad's Traditional Tailoring",
     slug: "ahmads-traditional-tailoring",
-    avatar: "/tailors/ahmad-avatar.jpg",
-    coverImage: "/tailors/ahmad-studio.jpg",
+    avatar: "/tailors/ahmad-avatar.webp",
+    coverImage: "/tailors/ahmad-studio.webp",
     description:
       "Specializing in traditional Indonesian clothing and modern alterations with 20 years of expertise.",
     specialty: [
@@ -232,8 +232,8 @@ export const tailors: Tailor[] = [
     id: "t3",
     name: "Elite Suits & Alterations",
     slug: "elite-suits-alterations",
-    avatar: "/tailors/elite-avatar.jpg",
-    coverImage: "/tailors/elite-studio.jpg",
+    avatar: "/tailors/elite-avatar.webp",
+    coverImage: "/tailors/elite-studio.webp",
     description:
       "Premium suit tailoring and alterations with European craftsmanship standards.",
     specialty: ["Luxury Suits", "Formal Wear", "Corporate Attire", "Tuxedos"],
@@ -332,8 +332,8 @@ export const tailors: Tailor[] = [
     id: "t4",
     name: "ModernFit Studio",
     slug: "modernfit-studio",
-    avatar: "/tailors/modernfit-avatar.jpg",
-    coverImage: "/tailors/modernfit-studio.jpg",
+    avatar: "/tailors/modernfit-avatar.webp",
+    coverImage: "/tailors/modernfit-studio.webp",
     description:
       "Contemporary fashion alterations and custom clothing for the modern individual.",
     specialty: [
@@ -429,8 +429,8 @@ export const tailors: Tailor[] = [
     id: "t5",
     name: "Harmony Heritage",
     slug: "harmony-heritage",
-    avatar: "/tailors/harmony-avatar.jpg",
-    coverImage: "/tailors/harmony-studio.jpg",
+    avatar: "/tailors/harmony-avatar.webp",
+    coverImage: "/tailors/harmony-studio.webp",
     description:
       "Specializing in traditional kebaya and modern fusion designs with intricate hand embroidery.",
     specialty: ["Kebaya", "Traditional Fusion", "Embroidery", "Wedding Attire"],
@@ -521,8 +521,8 @@ export const tailors: Tailor[] = [
     id: "t6",
     name: "SportsFit Alterations",
     slug: "sportsfit-alterations",
-    avatar: "/tailors/sportsfit-avatar.jpg",
-    coverImage: "/tailors/sportsfit-studio.jpg",
+    avatar: "/tailors/sportsfit-avatar.webp",
+    coverImage: "/tailors/sportsfit-studio.svg",
     description: "Expert alterations for athletic wear and sports uniforms.",
     specialty: [
       "Athletic Wear",
@@ -617,8 +617,8 @@ export const tailors: Tailor[] = [
     id: "t7",
     name: "Eco-Conscious Tailoring",
     slug: "eco-conscious-tailoring",
-    avatar: "/tailors/eco-avatar.jpg",
-    coverImage: "/tailors/eco-studio.jpg",
+    avatar: "/tailors/eco-avatar.webp",
+    coverImage: "/tailors/eco-studio.webp",
     description:
       "Sustainable tailoring using eco-friendly materials and upcycling techniques.",
     specialty: [
@@ -714,8 +714,8 @@ export const tailors: Tailor[] = [
     id: "t8",
     name: "Kidz Fashion Studio",
     slug: "kidz-fashion-studio",
-    avatar: "/tailors/kidz-avatar.jpg",
-    coverImage: "/tailors/kidz-studio.jpg",
+    avatar: "/tailors/kidz-avatar.webp",
+    coverImage: "/tailors/kidz-studio.webp",
     description:
       "Specialized children's clothing alterations and custom designs with focus on comfort and durability.",
     specialty: [
@@ -811,8 +811,8 @@ export const tailors: Tailor[] = [
     id: "t9",
     name: "Plus Size Perfection",
     slug: "plus-size-perfection",
-    avatar: "/tailors/plussize-avatar.jpg",
-    coverImage: "/tailors/plussize-studio.jpg",
+    avatar: "/tailors/plussize-avatar.webp",
+    coverImage: "/tailors/plussize-studio.webp",
     description:
       "Specialized in creating beautiful, comfortable clothing for plus-size individuals with expert fitting services.",
     specialty: [
@@ -908,8 +908,8 @@ export const tailors: Tailor[] = [
     id: "t10",
     name: "Leather & Denim Workshop",
     slug: "leather-denim-workshop",
-    avatar: "/tailors/leather-avatar.jpg",
-    coverImage: "/tailors/leather-studio.jpg",
+    avatar: "/tailors/leather-avatar.webp",
+    coverImage: "/tailors/leather-studio.webp",
     description:
       "Specializing in leather and denim alterations, repairs, and custom creations.",
     specialty: [

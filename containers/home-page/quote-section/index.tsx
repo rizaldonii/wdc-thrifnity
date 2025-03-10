@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import Image from "next/image";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const Quote = () => {
   const controls = useAnimation();
@@ -105,7 +105,7 @@ const Quote = () => {
             >
               <div className="w-16 h-16 rounded-full overflow-hidden mb-4 ring-4 ring-primary/20 shadow-lg transition-all">
                 <Image
-                  src="/images/lindsay-black.jpg"
+                  src="/home images/lindsay-black.webp"
                   alt="Lindsay Black"
                   width={96}
                   height={96}
