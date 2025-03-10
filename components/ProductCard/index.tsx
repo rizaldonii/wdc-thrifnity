@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Heart, ShoppingCart, Star, StarHalf } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { Product } from "@/types/product";
+import { Heart, ShoppingCart, Star, StarHalf } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -16,12 +16,25 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Get primary image or placeholder
-  const primaryImage =
-    product.images.find((img) => img.isPrimary)?.url ||
-    `/placeholder.svg?height=400&width=300&text=${encodeURIComponent(
-      product.name
-    )}`;
+  // Replace the existing getProductImageNumber function
+  const getProductImageNumber = (productName: string): number => {
+    switch (productName) {
+      case "Trendy T-Shirt":
+        return 1;
+      case "Floral Summer Dress":
+        return 2;
+      case "Elegant Blouse":
+        return 3;
+      default:
+        // Fallback to cycling through images based on ID if name doesn't match
+        const numId = typeof product.id === 'string' ? parseInt(product.id) : product.id;
+        return (numId % 3) + 1;
+    }
+  };
+
+  // Update the primaryImage assignment
+  const primaryImage = product.images.find((img) => img.isPrimary)?.url ||
+    `/home images/new arrivals/product${getProductImageNumber(product.name)}.webp`;
 
   // Format price with IDR currency
   const formatPrice = (value: number) => {
@@ -36,8 +49,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
   // Calculate discount percentage if there's an original price
   const discountPercentage = product.originalPrice
     ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
-      )
+      ((product.originalPrice - product.price) / product.originalPrice) * 100
+    )
     : 0;
 
   // Generate rating stars

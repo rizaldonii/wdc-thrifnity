@@ -45,13 +45,13 @@ export default function Category() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   // Transform categories data to include subcategory count and image URL
-  const categoryItems: CategoryItemProps[] = categories.map((category) => ({
+  const categoryItems: CategoryItemProps[] = categories.map((category, index) => ({
     id: category.id,
     name: category.name,
     slug: category.slug,
     description: category.description,
     subcategoryCount: category.subcategories.length,
-    imageUrl: `/placeholder.svg?height=400&width=320&text=${category.name}`,
+    imageUrl: `/home images/categories/category${index + 1}.webp`,
   }))
 
   // Filter categories based on search query
@@ -133,6 +133,42 @@ export default function Category() {
         .categories-section .grid-view .category-card .badge-text,
         .categories-section .grid-view .category-card .subcategory-count {
           color: white !important;
+        }
+        
+        /* Style for category action buttons in light mode */
+        .categories-section .p-2.rounded-full.bg-primary {
+          background-color: white !important;
+          color: var(--color-primary) !important;
+          border: 1px solid var(--color-border);
+        }
+        
+        .categories-section .p-2.rounded-full.bg-primary:hover {
+          background-color: var(--color-accent) !important;
+        }
+        
+        /* For dark mode, keep the original styling */
+        .dark .categories-section .p-2.rounded-full.bg-primary {
+          background-color: var(--color-primary) !important;
+          color: var(--color-primary-foreground) !important;
+          border: none;
+        }
+        
+        /* Style for the "Explore collection" text in list view */
+        .categories-section .inline-flex.items-center.font-medium.text-primary {
+          background-color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 0.375rem;
+          border: 1px solid var(--color-border);
+        }
+          
+        .categories-section .inline-flex.items-center.font-medium.text-primary:hover {
+          background-color: var(--color-accent);
+        }
+        
+        .dark .categories-section .inline-flex.items-center.font-medium.text-primary {
+          background-color: transparent;
+          border: none;
+          padding: 0;
         }
       `}</style>
       {/* Background decoration */}
@@ -350,7 +386,7 @@ export default function Category() {
                           {/* Update the badge to include the subcategory-count class */}
                           <Badge variant="outline" className="bg-background/20 border-transparent">
                             <span className="text-white">{category.subcategoryCount}</span>
-                            <span className="text-[#7d9bc5]">&nbsp;subcategories</span>
+                            <span className="text-white">&nbsp;subcategories</span>
                           </Badge>
                           <span className="p-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300 shadow-lg bg-primary text-primary-foreground">
                             <ChevronRight className="w-4 h-4" />
