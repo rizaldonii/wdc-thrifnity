@@ -3,31 +3,12 @@ import { tailors } from "@/data/tailors";
 import TailorProfile from "@/containers/tailor-show/tailor-profile";
 import TailorTabs from "@/containers/tailor-show/tailor-tabs";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const tailor = tailors.find((t) => t.slug === params.slug);
 
-  if (!tailor) {
-    return {
-      title: "Tailor Not Found",
-    };
-  }
+type tParams = Promise<{ slug: string }>;
 
-  return {
-    title: `${tailor.name} - Expert Tailor`,
-    description: tailor.description,
-  };
-}
-
-export default function TailorShowPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const tailor = tailors.find((t) => t.slug === params.slug);
+export default async function TailorShowPage( props: { params: tParams } ) {
+  const { slug } = await props.params;
+  const tailor = tailors.find((t) => t.slug === slug);
 
   if (!tailor) {
     notFound();
