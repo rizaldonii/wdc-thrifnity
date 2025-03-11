@@ -1,13 +1,14 @@
 import ProductDetails from "@/containers/product-page/product-details"
 import { products } from "@/data/products"
-import type { Metadata } from "next"
+import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
 
-interface ProductPageProps {
+type Props = {
   params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const product = products.find((p) => p.slug === params.slug)
 
   if (!product) {
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = products.find((p) => p.slug === params.slug)
 
   if (!product) {
