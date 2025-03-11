@@ -3,18 +3,12 @@ import { products } from "@/data/products"
 import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
 
-// Define the params type for this page
-type PageParams = {
-  slug: string
-}
-
-// Define the props type for generateMetadata
-type MetadataProps = {
-  params: PageParams
+type Props = {
+  params: { slug: string }
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params }: MetadataProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const product = products.find((p) => p.slug === params.slug)
 
   if (!product) {
@@ -46,24 +40,17 @@ export async function generateMetadata({ params }: MetadataProps, parent: Resolv
     },
   }
 }
+type tParams = Promise<{ slug: string }>;
 
-// Define the props type for the page component
-type PageProps = {
-  params: PageParams
-  searchParams: { [key: string]: string | string[] | undefined }
-}
 
-// Page component
-export default function ProductPage({ params }: PageProps) {
-  // Find the product by slug
-  const product = products.find((p) => p.slug === params.slug)
+export default async function ProductPage(props : { params: tParams } ) {
+  const { slug } = await props.params;
+  const product = products.find((p) => p.slug === slug)
 
-  // If product not found, show 404
   if (!product) {
     notFound()
   }
 
-  // Render the product details
   return <ProductDetails product={product} />
-}
+}``
 
