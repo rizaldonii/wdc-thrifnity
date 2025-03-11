@@ -8,6 +8,9 @@ import type {
   ShoeCategory,
 } from "./category";
 
+type SizeType = ClothingSize | BagSize | ShoeSize | DressSize;
+
+
 export type ClothingSize = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "3XL";
 export type DressSize = "28" | "30" | "32" | "34" | "36" | "38" | "40" | "42";
 export type BagSize = "Small" | "Medium" | "Large";
@@ -132,7 +135,7 @@ export interface Product {
   images: ProductImage[];
   variants: ProductVariant[];
   colors: ProductColor[];
-  availableSizes: ClothingSize[] | BagSize[] | ShoeSize[] | DressSize[];
+  availableSizes: SizeType[];
 
   // Inventory
   totalStock: number;

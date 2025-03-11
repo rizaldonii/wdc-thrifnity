@@ -7,10 +7,11 @@ import {
   useCallback,
   ReactNode,
 } from "react";
-import { Product, ProductCategory, ClothingCondition } from "@/types/product";
+import { Product, ProductCategory, ClothingCondition, ClothingSize, BagSize, ShoeSize, DressSize } from "@/types/product";
 import { products as allProducts } from "@/data/products";
 
 type PriceRange = [number, number];
+type SizeType = ClothingSize | BagSize | ShoeSize | DressSize;
 
 interface FilterState {
   searchQuery: string;
@@ -104,7 +105,7 @@ export function ProductFilterProvider({ children }: { children: ReactNode }) {
     if (
       filters.sizes.length > 0 &&
       !filters.sizes.some((size) =>
-        product.availableSizes.includes(size as any)
+        product.availableSizes.includes(size as SizeType)
       )
     ) {
       return false;
