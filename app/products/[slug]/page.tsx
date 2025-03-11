@@ -1,17 +1,14 @@
-import ProductDetails from "@/containers/product-page/product-details";
-import { products } from "@/data/products";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import ProductDetails from "@/containers/product-page/product-details"
+import { products } from "@/data/products"
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 
 interface ProductPageProps {
-  params: { slug: string };
+  params: { slug: string }
 }
 
-export async function generateMetadata({
-  params,
-}: ProductPageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const product = products.find((p) => p.slug === resolvedParams.slug);
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const product = products.find((p) => p.slug === params.slug)
 
   if (!product) {
     return {
@@ -21,7 +18,7 @@ export async function generateMetadata({
         index: false,
         follow: false,
       },
-    };
+    }
   }
 
   return {
@@ -32,21 +29,24 @@ export async function generateMetadata({
       description: product.description,
       type: "website",
       images: product.images[0]?.url
-        ? [{
-          url: product.images[0].url,
-          alt: product.name,
-        }]
+        ? [
+            {
+              url: product.images[0].url,
+              alt: product.name,
+            },
+          ]
         : [],
     },
-  };
+  }
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = products.find((p) => p.slug === params.slug);
+  const product = products.find((p) => p.slug === params.slug)
 
   if (!product) {
-    notFound();
+    notFound()
   }
 
-  return <ProductDetails product={product} />;
+  return <ProductDetails product={product} />
 }
+
