@@ -40,12 +40,11 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     },
   }
 }
-type tParams = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string }>
 
-
-export default async function ProductPage(props : { params: tParams } ) {
-  const { slug } = await props.params;
-  const product = products.find((p) => p.slug === slug)
+export default async function ProductPage({ params }: { params: Params } ) {
+  const { slug } = await params;
+    const product = products.find((p) => p.slug === slug)
 
   if (!product) {
     notFound()
